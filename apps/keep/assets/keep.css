@@ -1,0 +1,15 @@
+.notes-container {
+    background-color: #99a2e4b5;
+    height: 80vh;
+    padding: 20px;
+}
+
+.note-preview {
+    background-color: white;
+    width: 200px;
+    height: 250px;
+}
+
+.notes-list {
+    max-height: 100%;
+}

@@ -2,14 +2,61 @@
 @import url('../apps/keep/assets/keep.css');
 * {
     box-sizing: border-box;
+    margin: 0;
 }
 
 body {
     margin: 0;
+    background: url('../img/main4.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 a {
     text-decoration: none;
+}
+
+
+/* ------------------ components ------------------- */
+
+header img {
+    width: 180px;
+    image-orientation: flip;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+header img:hover {
+    opacity: 0.7;
+}
+
+.appsus-header {
+    /* background-color: #a3b6d48a; */
+    /* position: fixed; */
+}
+
+.nav-bar {
+    width: 80%;
+    margin-right: 30px;
+}
+
+.main-nav-list {
+    font-size: 2em;
+    font-family: 'Exo 2', sans-serif;
+    color: white;
+    width: 100%;
+    border-radius: 200px 18px 198px 0px;
+    background-color: #bc88ddb8;
+}
+
+.main-nav-list a {
+    color: #d7f70a;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.main-nav-list a:hover {
+    color: white;
 }
 
 
@@ -49,6 +96,10 @@ a {
 
 .align-center {
     align-items: center;
+}
+
+.wrap {
+    flex-wrap: wrap;
 }
 
 .column {
