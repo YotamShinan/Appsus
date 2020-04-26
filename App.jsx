@@ -19,8 +19,8 @@ export class App extends React.Component {
     render() {
         return (
             <Router>
-                <header className="">
-                    <h1>Appsus</h1>
+                <header className="appsus-header flex space-between align-center">
+                <NavLink exact to='/'><img alt="logo" src="./img/logo.png"></img></NavLink>
                     <NavBar history={history}></NavBar>
                 </header>
                 <main>
@@ -38,5 +38,6 @@ export class App extends React.Component {
         )
     }
 }
+
 
 
