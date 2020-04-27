@@ -1,27 +1,33 @@
-import AddNote from "./AddNote";
+// import React from 'react'
+import services from '../services/keepService.js'
+import { makeId } from '../../../services/Utils.js'
+// import eventBusService from '../../../services/eventBusService.js'
 
 export default class CreateNote extends React.Component {
     state = {
         type: '',
         text: '',
-        placeholder: 'Enter here'
+        placeholder: 'Add a new note right here, friend'
     }
 
     componentDidMount() {
-
+        console.log('CreateNote mounted!');
+        
     }
 
     onInputChange = (ev) => {
-        this.setState({ text: ev.taget.value })
+        this.setState({ text: ev.target.value })
     }
 
     onAddNote = (ev) => {
         ev.preventDefault();
-        if (!this.state.text) return
+        if (!this.state.text) return;
         const details = this.setDetails()
-        AddNote(this.state.type, details)
+        console.log('details:', details);
+        
+        services.addNote(this.state.type, details)
             .then(this.props.loadNotes);
-        eventBusService.callModal('updatesModal', { type: 'success', message: 'Note was successfully added' });
+        // eventBusService.callModal('updatesModal', { type: 'success', message: 'Note was successfully added' });
 
         this.setState({ text: '' })
     }
@@ -45,9 +51,10 @@ export default class CreateNote extends React.Component {
                 break;
             case 'todo':
                 details.todos = []
-                this.state.text.split(',').map(txt => details.todos.push({ id: getRandomId(), txt, isDone: false }))
+                this.state.text.split(',').map(txt => details.todos.push({ id: makeId(), txt, isDone: false }))
                 break;
             default:
+                details.txt = this.state.text
                 break;
         }
         return details
@@ -60,7 +67,7 @@ export default class CreateNote extends React.Component {
                 this.setState({ placeholder: 'Enter text', text: '' })
                 break;
             case 'todo':
-                this.setState({ placeholder: 'Enter todos separated by commas', text: '' })
+                this.setState({ placeholder: 'Enter stuff to do', text: '' })
                 break;
             case 'img':
                 this.setState({ placeholder: 'Enter image URL', text: '' })
@@ -80,7 +87,7 @@ export default class CreateNote extends React.Component {
     }
     get types() {
         const { type } = this.state
-        return <div className='types-container'>
+        return <div className='types-container flex space-evenly'>
             <label htmlFor="txt" className={ (type === 'txt') ? 'active-type' : '' }>
                 <i className="fas fa-text-height"></i></label>
             <input onChange={ this.onTypeChange } type='radio' id='txt' name='type' value='txt' />
@@ -105,8 +112,8 @@ export default class CreateNote extends React.Component {
     }
 
     render() {
-        return <form onSubmit={ this.onAddNote }>
-            <div className="add-note-container">
+        return <form className="add-note-form flex justify-center" onSubmit={ this.onAddNote }>
+            <div className="add-note-container flex column">
                 <input placeholder={ this.state.placeholder } onChange={ this.onInputChange } value={ this.state.text } type="search" name="add-note" id="" />
                 { this.types }
             </div>

@@ -1,111 +1,104 @@
 import utils from '../../../services/util-service.js'
-import { saveToStorage, loadFromStorage } from '../../../services/storage-service.js'
+import Note from '../services/noteModel.js'
+import storageService from '../../../services/storage-service.js'
 
 export default {
-    query
+    query,
+    addNote,
+    loadNotes,
+    saveNotes,
+
 };
-
-
 
 var gNotes = null;
 
 function query() {
     if (!gNotes) {
-        gNotes = gDefaultNotes;
+        createTestNotes();
+        console.log(gNotes);
         return gNotes
     } else return gNotes
 }
 
 
-const gDefaultNotes = [{
-        type: "NoteText",
-        id: utils.makeId(),
-        isPinned: false,
-        info: {
-            title: "TEXT NOTE",
-            txt: "so much wow"
+function addNote(type, details /*isDraft = false*/ ) {
+    console.log('addNote at Services');
+    loadNotes()
+    gNotes = JSON.parse(JSON.stringify(gNotes))
+    const newNote = new Note(type, details)
+    gNotes.push(newNote)
+    saveNotes()
+    return Promise.resolve(newNote)
+
+}
+
+function loadNotes() {
+    gNotes = storageService.loadFromStorage('notes', null)
+    if (!gNotes || !gNotes.length) createTestNotes()
+}
+
+function saveNotes() {
+    storageService.saveToStorage('notes', gNotes)
+}
+
+
+function createTestNotes() {
+    gNotes = [{
+            type: "NoteText",
+            id: utils.makeId(),
+            isPinned: false,
+            info: {
+                title: "TEXT NOTE",
+                txt: "so much wow"
+            },
+            style: {
+                fontSize: 14,
+                fontColor: "pink",
+                background: "blue"
+            }
         },
-        style: {
-            fontSize: 14,
-            fontColor: "pink",
-            background: "blue"
-        }
-    },
-    {
-        type: "NoteImg",
-        id: utils.makeId(),
-        isPinned: false,
-        info: {
-            title: "IMAGE NOTE",
-            url: "https://i5.walmartimages.com/asr/209bb8a0-30ab-46be-b38d-58c2feb93e4a_1.1a15fb5bcbecbadd4a45822a11bf6257.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF"
+        {
+            type: "NoteImg",
+            id: utils.makeId(),
+            isPinned: false,
+            info: {
+                title: "IMAGE NOTE",
+                url: "https://i5.walmartimages.com/asr/209bb8a0-30ab-46be-b38d-58c2feb93e4a_1.1a15fb5bcbecbadd4a45822a11bf6257.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF"
+            },
+            style: {
+                fontSize: 14,
+                fontColor: "pink",
+                background: "blue"
+            }
         },
-        style: {
-            fontSize: 14,
-            fontColor: "pink",
-            background: "blue"
+        {
+            type: "NoteTodos",
+            id: utils.makeId(),
+            isPinned: true,
+            info: {
+                title: "TODO NOTE",
+                todos: [
+                    { txt: "Do things", isDone: true, doneAt: null },
+                    { txt: "Do more", isDone: false, doneAt: 'timeStamp' },
+
+                ]
+            },
+            style: {
+                fontSize: 14,
+                fontColor: "pink",
+                background: "blue"
+            }
         }
-    },
-    {
-        type: "NoteTodos",
-        id: utils.makeId(),
-        isPinned: true,
-        info: {
-            title: "TODO NOTE",
-            todos: [
-                { txt: "Do things", isDone: true, doneAt: null },
-                { txt: "Do more", isDone: false, doneAt: 'timeStamp' },
-
-            ]
-        },
-        style: {
-            fontSize: 14,
-            fontColor: "pink",
-            background: "blue"
-        }
-    }
-]
+    ];
+}
 
 
-
-// import storageService from '../../../services/storageService.js'
-// import { getRandomId } from '../../../services/Utils.js'
-// import Note from './noteModel.js'
-// let gNotes
-
-// export {
-//     addNote,
-//     deleteNote,
-//     getNotesToRender,
-//     getNoteById,
-//     updateNoteById,
-//     togglePin,
-//     addTodo,
-// }
-
-// function addNote(type, details, isDraft = false) {
-//     loadNotes()
-//     gNotes = JSON.parse(JSON.stringify(gNotes))
-//     const newNote = isDraft ? new Note(type, details, true) : new Note(type, details)
-//     gNotes.push(newNote)
-//     saveNotes()
-//     return Promise.resolve(newNote)
-
-// }
 // function deleteNote(noteId) {
 //     let noteIdx = getNoteIdxById(noteId)
 //     gNotes = JSON.parse(JSON.stringify(gNotes))
 //     gNotes.splice(noteIdx, 1)
 //     saveNotes()
 //     return Promise.resolve(true)
-// }
-
-// function loadNotes() {
-//     gNotes = storageService.loadFromStorage('notes', null)
-//     if (!gNotes || !gNotes.length) createTestNotes()
-// }
-
-// function saveNotes() {
-//     storageService.saveToStorage('notes', gNotes)
 // }
 
 // function getNoteIdxById(noteId) {
@@ -183,138 +176,4 @@ const gDefaultNotes = [{
 //         saveNotes()
 //     })
 //     return Promise.resolve(true)
-// }
-
-// function createTestNotes() {
-//     gNotes = [
-//         {
-//             id: getRandomId(),
-//             type: "txt",
-//             isPinned: true,
-//             title: 'Welcome to keep notes',
-//             details: {
-//                 txt: "Try adding some notes for yourself!"
-//             },
-//             style: {
-//                 backgroundColor: "#ffff9f"
-//             }
-//         },
-//         {
-//             id: getRandomId(),
-//             type: "todo",
-//             isPinned: true,
-//             title: 'Features',
-//             details: {
-//                 todos: [
-//                     { id: getRandomId(), txt: "Adding todo lists", isDone: true },
-//                     { id: getRandomId(), txt: "embed spotify and youtube links", isDone: false },
-//                     { id: getRandomId(), txt: "linking to different video and sound files", isDone: false },
-//                     { id: getRandomId(), txt: "add google maps by coords or name!", isDone: false }
-//                 ]
-//             },
-//             style: {
-//                 backgroundColor: "#ffff9f"
-//             }
-//         },
-//         {
-//             id: getRandomId(),
-//             type: "txt",
-//             isPinned: false,
-//             title: 'React is a friend',
-//             details: {
-//                 txt: "NOTTT...."
-//             },
-//             style: {
-//                 backgroundColor: "#ffff9f"
-//             }
-//         },
-//         {
-//             id: getRandomId(),
-//             type: "img",
-//             isPinned: false,
-//             title: "Me playing Mi",
-//             details: {
-//                 url: "https://loremflickr.com/320/240",
-//             },
-//             style: {
-//                 backgroundColor: "#ffff9f"
-//             }
-//         },
-//         {
-//             id: getRandomId(),
-//             type: "music",
-//             isPinned: false,
-//             title: "Random nigga song",
-//             details: {
-//                 url: "https://www.mboxdrive.com/Blue%20lights.mp3",
-//             },
-//             style: {
-//                 backgroundColor: "#ffff9f"
-//             }
-//         },
-//         {
-//             id: getRandomId(),
-//             type: "img",
-//             isPinned: false,
-//             title: "my cat is awesome",
-//             details: {
-//                 url: "https://cdn.shopify.com/s/files/1/1369/6411/articles/g_.fh_1_c23e86d3-e918-497c-b209-b583225ede34_2048x.progressive.jpg?v=1563422994",
-//             },
-//             style: {
-//                 backgroundColor: "#ffff9f"
-//             }
-//         },
-//         {
-//             id: getRandomId(),
-//             type: "video",
-//             isPinned: false,
-//             title: "Cute bear",
-//             details: {
-//                 url: "https://www.w3schools.com/html/movie.mp4",
-//             },
-//             style: {
-//                 backgroundColor: "#ffff9f"
-//             }
-//         },
-//         {
-//             id: getRandomId(),
-//             type: "todo",
-//             title: "Grocery list:",
-//             isPinned: false,
-//             details: {
-//                 todos: [
-//                     { id: getRandomId(), txt: "buy milk", isDone: false },
-//                     { id: getRandomId(), txt: "buy bamba", isDone: false },
-//                     { id: getRandomId(), txt: "forget to buy milk", isDone: false }
-//                 ]
-//             },
-//             style: {
-//                 backgroundColor: "lightsalmon"
-//             }
-//         },
-//         {
-//             id: getRandomId(),
-//             type: "video",
-//             title: "Awesome",
-//             isPinned: false,
-//             details: {
-//                 url: 'https://www.youtube.com/watch?v=mXjNATmIruI'
-//             },
-//             style: {
-//                 backgroundColor: "lightsalmon"
-//             }
-//         },
-//         {
-//             id: getRandomId(),
-//             type: "maps",
-//             title: "Home is far far away",
-//             isPinned: false,
-//             details: {
-//                 place: '33.2397939,35.6496942'
-//             },
-//             style: {
-//                 backgroundColor: "lightsalmon"
-//             }
-//         }
-//     ];
 // }

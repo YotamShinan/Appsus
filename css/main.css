@@ -10,7 +10,7 @@ body {
     /* background: url('../img/main4.jpg');
     background-repeat: no-repeat;
     background-size: cover; */
-    background-color: #8395a7;
+    background: linear-gradient(to right, rgba(210, 255, 82, 1) 0%, rgba(145, 232, 66, 1) 86%, rgba(145, 232, 66, 1) 100%)
 }
 
 a {
@@ -32,7 +32,8 @@ header img:hover {
 }
 
 .appsus-header {
-    background-color: #2d3436;
+    background-color: white;
+    box-shadow: 0px 6px 4px 0px rgba(0, 0, 0, 0.66);
 }
 
 .nav-bar {
