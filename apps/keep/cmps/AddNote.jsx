@@ -1,32 +1,34 @@
-import AddNote from "./AddNote";
+import React from 'react'
+import { addNote } from '../services/keepService.js'
+import { getRandomId } from '../../../services/Utils.js'
+import eventBusService from '../../../services/eventBusService.js'
 
-export default class CreateNote extends React.Component {
+export default class AddNote extends React.Component {
     state = {
-        type: '',
+        draftNote: null,
+        type: 'txt',
         text: '',
-        placeholder: 'Enter here'
+        placeholder: 'Enter text'
     }
 
     componentDidMount() {
-
+        // addNote('txt', { txt: '' }, true).then((draftNote) => this.setState({ draftNote }))
     }
 
     onInputChange = (ev) => {
-        this.setState({ text: ev.taget.value })
+        this.setState({ text: ev.target.value })
     }
-
     onAddNote = (ev) => {
-        ev.preventDefault();
+        ev.preventDefault()
         if (!this.state.text) return
-        const details = this.setDetails()
-        AddNote(this.state.type, details)
+        const details = this.makeDetails()
+        addNote(this.state.type, details)
             .then(this.props.loadNotes);
-        eventBusService.callModal('updatesModal', { type: 'success', message: 'Note was successfully added' });
+        eventBusService.callModal('updatesBox', { type: 'success', message: 'Note added Successfully!' });
 
         this.setState({ text: '' })
     }
-
-    setDetails = () => {
+    makeDetails = () => {
         let details = {};
         switch (this.state.type) {
             case 'txt':
@@ -34,6 +36,7 @@ export default class CreateNote extends React.Component {
                 break;
             case 'img':
                 details.url = this.state.text
+                break;
             case 'video':
                 details.url = this.state.text
                 break;
@@ -78,6 +81,7 @@ export default class CreateNote extends React.Component {
                 break;
         }
     }
+
     get types() {
         const { type } = this.state
         return <div className='types-container'>
@@ -101,16 +105,19 @@ export default class CreateNote extends React.Component {
                 <i className="fas fa-music"></i></label>
             <input onChange={ this.onTypeChange } type='radio' id='music' name='type' value='music' />
 
+            {/* <MediaAddBtns currType={this.state.type} handleClick={this.onTypeChange}></MediaAddBtns> */ }
         </div>
     }
 
     render() {
         return <form onSubmit={ this.onAddNote }>
-            <div className="add-note-container">
-                <input placeholder={ this.state.placeholder } onChange={ this.onInputChange } value={ this.state.text } type="search" name="add-note" id="" />
+            <div className='add-container flex auto-center'>
+                {/* {this.state.draftNote && <NotePreview isDraft={true} textStyle={this.state.draftNote.style} note={this.state.draftNote}></NotePreview>} */ }
+                <input placeholder={ this.state.placeholder } onChange={ this.onInputChange }
+                    value={ this.state.text } type="search" name="add" id="" />
                 { this.types }
+                {/* <button onClick={this.onAddNote}>Add</button> */ }
             </div>
         </form>
     }
 }
-

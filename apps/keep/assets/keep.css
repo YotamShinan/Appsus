@@ -5,11 +5,40 @@
 }
 
 .note-preview {
-    background-color: white;
-    width: 200px;
-    height: 250px;
+    /* background-color: white; */
+    width: 350px;
+}
+
+.note {
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid white;
+    opacity: 0.8;
+    transition: 0.2s;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.note:hover {
+    opacity: 1;
 }
 
 .notes-list {
     max-height: 100%;
+}
+
+.text-note {
+    background-color: yellow;
+}
+
+.todo-note {
+    background-color: pink;
+}
+
+.img-note {
+    background-color: lightskyblue
+}
+
+.img-note img {
+    width: 100%;
 }
