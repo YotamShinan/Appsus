@@ -1,15 +1,40 @@
 const { Link } = ReactRouterDOM
 
+import util from '../../../services/util-service.js';
+import emailService from '../services/emailService.js';
+
 export class NewEmailForm extends React.Component {
-    render() {
-        return (
-            <div className="new-email">
-            </div>
-            )
-        }
+    state = {
+        subject: '',
+        address: '',
+        body: ''
     }
-    
-    {/* <form className="flex column new-mail-form" onSubmit={ this.onFormSubmit } action="" method="post">
+    componentDidUpdate() {
+        console.log(this.state.subject)
+    }
+    onAddEmail = (ev) => {
+        ev.preventDefault();
+        emailService.createEmail(this.state.subject, this.state.address, this.state.body)
+        this.props.history.push('/emails/')
+    }
+    onInputChange = (ev) => {
+        const name = ev.target.name
+        const value = ev.target.value
+        this.setState({ [name]: value })
+    }
+    render() {
+        return <form className="add-email-form" onSubmit={this.onAddEmail}>
+                    <div className="add-email-container">
+                        <input autoComplete="off" placeholder="subject" onChange={this.onInputChange} value={this.state.subject} type="search" name="subject" id="" />
+                        <input autoComplete="off" placeholder="send to:" onChange={this.onInputChange} value={this.state.address} type="search" name="address" id="" />
+                        <input autoComplete="off" placeholder="write your email here" onChange={this.onInputChange} value={this.state.body} type="search" name="body" id="" />
+                        <button>Send</button>
+                    </div>
+              </form>
+    }
+}
+
+{/* <form className="flex column new-mail-form" onSubmit={ this.onFormSubmit } action="" method="post">
     <div className="new-mail-form-title">{ this.state.formTitle }</div>
     <span>
         <label htmlFor="new-mail-subject">To:</label>
