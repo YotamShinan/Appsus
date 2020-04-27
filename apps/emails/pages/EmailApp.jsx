@@ -3,6 +3,8 @@ import {EmailList} from "../cmps/EmailList.jsx"
 import {EmailDetails} from "../cmps/EmailDetails.jsx"
 import {NewEmailForm} from "../cmps/NewEmailForm.jsx"
 import {SideNav} from "../cmps/SideNav.jsx"
+import {SearchBox} from "../cmps/SearchBox.jsx"
+
 
 const Router = ReactRouterDOM.HashRouter
 const { Route, Switch, NavLink } = ReactRouterDOM
@@ -30,6 +32,7 @@ export default class EmailApp extends React.Component {
         const {emails} = this.state;
         return (
             <Router>
+                <SearchBox/>
                 <section  className="emails-container flex">
                         <SideNav/>
                         <Switch>

@@ -6,7 +6,7 @@ export default function EmailPreview(props) {
             <Link to={`/emails/${email.id}`} >
                 <li className={`${(!email.isRead) ? "unread-email": "read-email"} flex space-between`}>
                     <div>{email.sender}</div>
-                    <div>{email.subject }</div>
+                    <div className="preview-subject">{email.subject } - <span className="preview-body">{email.body}</span></div>
                     <div>{new Date(email.sentAt).toDateString()}</div>
                 </li>
             </Link>

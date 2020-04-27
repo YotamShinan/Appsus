@@ -20,7 +20,7 @@
 .side-nav {
     width: 200px;
     height: 300px;
-    border: 1px solid red;
+    margin-top: -17px;
 }
 
 .new-mail-btn {
@@ -50,7 +50,7 @@
 }
 
 .tray-btn>*:hover {
-    opacity: 0.3;
+    opacity: 0.9;
 }
 
 .email-details-btns>* {
@@ -69,3 +69,28 @@
 .emails-details-main h1 {
     font-size: 3.5rem;
 }
+
+.active-filter{
+    background-color: rgb(196, 169, 169);
+}
+
+.preview-body{
+    font-size: 0.8rem;
+}
+
+.preview-subject{
+    font-size: 1.2rem;
+}
+
+.emails-search-box{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    bottom: -4px;     
+    margin-top: -45px;     
+    margin-bottom: 65px;
+}
+
+/* .email-search-input{
+  
+} */

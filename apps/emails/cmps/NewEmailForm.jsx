@@ -27,7 +27,9 @@ export class NewEmailForm extends React.Component {
                     <div className="add-email-container">
                         <input autoComplete="off" placeholder="subject" onChange={this.onInputChange} value={this.state.subject} type="search" name="subject" id="" />
                         <input autoComplete="off" placeholder="send to:" onChange={this.onInputChange} value={this.state.address} type="search" name="address" id="" />
-                        <input autoComplete="off" placeholder="write your email here" onChange={this.onInputChange} value={this.state.body} type="search" name="body" id="" />
+                        {/* <input autoComplete="off" placeholder="write your email here" onChange={this.onInputChange} value={this.state.body} type="search" name="body" id="" /> */}
+                        <textarea name="body" value={ this.state.body } onChange={ this.onInputChange} placeholder="Your text..." required></textarea>
+                        
                         <button>Send</button>
                     </div>
               </form>

@@ -7,13 +7,15 @@ export default {
     toggleStar,
     toggleRead,
     toggleTrash,
-    createEmail
+    createEmail,
+    numOfUnread
 }
 
 function query(filter){
     if (filter === 'inbox') return getInbox();
     if (filter === 'trash') return getTrash();
     if (filter === 'starred') return getStarred();
+    if (filter === 'unread') return getUnread();
     return gEmails;
 }
 
@@ -26,6 +28,11 @@ const gEmails = [{id: util.makeId(), subject: 'Wassap?', body: 'Pick up!',
 
 function getTrash(){
     const result = gEmails.filter(email => email.isTrash);
+    return result;
+}
+
+function getUnread(){
+    const result = gEmails.filter(email => !email.isRead);
     return result;
 }
 
@@ -85,6 +92,12 @@ function createEmail(subject, body, senderAddress){
         isTrash: false,
     }
     gEmails.unshift(newMail);
+}
+
+function numOfUnread(){
+    var counter = 0;
+    gEmails.forEach(email => {if (!email.isRead) counter++});
+    return counter;
 }
 
 createEmail('New Email', 'Done at createEmail', 'stam@stam.com')
