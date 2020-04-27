@@ -1,7 +1,6 @@
-
-
-
 import EmailPreview from './EmailPreview.jsx'
+
+
 
 export function EmailList(props) {
     // console.log(props)

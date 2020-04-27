@@ -32,3 +32,7 @@ border: 1px solid red;
     outline: none;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
 }
+
+.starred{
+    color: red;
+}
