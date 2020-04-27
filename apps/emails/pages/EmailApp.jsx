@@ -22,7 +22,6 @@ export default class EmailApp extends React.Component {
     }
     loadEmails = () =>{
         const filterBy = this.props.match.params.filterBy;
-        console.log('filter by', filterBy)
         const emails = emailService.query(filterBy);
         this.setState({emails});
     }
@@ -37,7 +36,6 @@ export default class EmailApp extends React.Component {
                             <Route  exact component={NewEmailForm}  path="/emails/new" />
                             <Route  exact component={EmailDetails}  path="/emails/:emailId" />
                             <Route  component={() => <EmailList emails={emails}/> }  path="/emails" />
-                        {/* {emails && <EmailList emails={emails} />} */}
                         </Switch>
                 </section>
 

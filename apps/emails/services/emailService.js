@@ -1,10 +1,13 @@
+import util from '../../../services/util-service.js'
+
 export default {
     query,
     getById,
     remove,
     toggleStar,
     toggleRead,
-    toggleTrash
+    toggleTrash,
+    createEmail
 }
 
 function query(filter){
@@ -53,13 +56,13 @@ function _getIdxById(emailId) {
 
 function toggleStar(emailId){
     const email = gEmails.find(email => email.id === emailId)
-    email.isStarred = (!email.isStarred);
+    email.isStarred = !email.isStarred;
     return Promise.resolve(email);
 }
 
 function toggleRead(emailId){
     const email = gEmails.find(email => email.id === emailId)
-    email.isRead = (!email.isRead);
+    email.isRead = !email.isRead;
     return Promise.resolve(email);
 }
 
@@ -68,3 +71,20 @@ function toggleTrash(emailId){
     email.isTrash = (!email.isTrash);
     return Promise.resolve(email);
 }
+
+function createEmail(subject, body, senderAddress){
+    let newMail = {
+        id: util.makeId(),
+        subject,
+        body,
+        isRead: false,
+        sentAt: Date.now(),
+        sender: 'Dan',
+        senderAddress,
+        isStarred: false,
+        isTrash: false,
+    }
+    gEmails.push(newMail);
+}
+
+createEmail('New Email', 'Done at createEmail', 'stam@stam.com')
