@@ -8,7 +8,6 @@ export class EmailDetails extends React.Component{
     }
     componentDidMount() {
         const id = this.props.match.params.emailId;
-        // console.log(id);
         emailService.getById(id)
             .then(email => {
                 this.setState({email})
@@ -18,6 +17,7 @@ export class EmailDetails extends React.Component{
         emailService.remove(this.state.email.id)
             .then(()=>{
                 console.log('Email was removed');
+                this.props.history.push('/emails/')
             })
             .catch(err => {
                 alert('OOPs, try again');
@@ -28,8 +28,7 @@ export class EmailDetails extends React.Component{
     onToggleStarEmail = () => {
         emailService.toggleStar(this.state.email.id)
         .then((email) => {
-            // console.log(email, 'Email was starred / unstarred');
-            // console.log('Email was starred / unstarred');
+            console.log(email, 'Email was starred / unstarred');
             this.setState({email})
         })
         .catch(err => {
@@ -41,8 +40,7 @@ export class EmailDetails extends React.Component{
         emailService.toggleRead(this.state.email.id)
         .then((email) => {
             console.log(email, 'Email marked as read / unread');
-            console.log('Email marked as read / unread');
-            this.setState({email})
+            this.props.history.push('/emails/')
         })
         .catch(err => {
             alert('OOPs, try again');
@@ -53,8 +51,8 @@ export class EmailDetails extends React.Component{
         emailService.toggleTrash(this.state.email.id)
         .then((email) => {
             console.log(email, 'Email moved to/from Trash');
-            console.log('Email moved to/from Trash');
-            this.setState({email})
+            this.props.history.push('/emails/')
+
         })
         .catch(err => {
             alert('OOPs, try again');
@@ -69,16 +67,20 @@ export class EmailDetails extends React.Component{
             (!email)? Loading : 
             <section className="email-details">
                 <div>
-                    <div>
+                    <div className="email-details-btns">
                         <Link to="/emails/">Back</Link>
-                        <Link to="/emails/" onClick={this.onRemoveEmail}>Move to trash</Link>
+                        <button to="/emails/" onClick={this.onToggleTrash}>Move to {(email.isTrash)? "Inbox": "Trash"}</button>
                         <button onClick={this.onToggleStarEmail} className={(email.isStarred)? "starred": ""}>Star</button>
-                        <Link to="/emails/" onClick={this.onToggleRead} >{(email.isRead)? "Mark as unread": "Mark as read"}</Link>
+                        <button to="/emails/" onClick={this.onToggleRead} >{(email.isRead)? "Mark as unread": "Mark as read"}</button>
+                        <button onClick={this.onRemoveEmail}>Delete</button>
+
                     </div>
-                    <h1>{email.subject}</h1>
-                    <h2>{email.sender} <span>{email.senderAddress}</span></h2>
+                    <div  className="emails-details-main">
+                        <h1>{email.subject}</h1>
+                        <h2>{email.sender} &#60;<span>{email.senderAddress}</span>&gt;</h2>
+                        <p>{email.body}</p>
+                    </div>
                 </div>
-                <p>{email.body}</p>
             </section>     
             )
     }
