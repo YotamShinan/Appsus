@@ -1,28 +1,29 @@
-.emails-table td{
+.emails-table td {
     border: 1px solid black;
 }
 
-.emails-table{
+.emails-table {
     width: 100%;
 }
 
-.unread-email{
+.unread-email {
     font-weight: bold;
 }
 
-.emails-table li{
+.emails-table li {
     padding: 15px;
-    background-color: lightskyblue;
     opacity: 0.8;
+    background-color: white;
+    border-bottom: 1px solid;
 }
 
-.side-nav{
-width: 200px;
-height: 300px;
-border: 1px solid red;
+.side-nav {
+    width: 200px;
+    height: 300px;
+    border: 1px solid red;
 }
 
-.new-mail-btn{
+.new-mail-btn {
     background: #fefefe;
     padding: 10px 17px;
     font-size: 1.3rem;
@@ -33,25 +34,26 @@ border: 1px solid red;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
-.starred{
+.starred {
     color: red;
 }
 
-.tray-btn{
+.tray-btn {
     margin-top: 20px;
 }
-.tray-btn > *{
+
+.tray-btn>* {
     background-color: #fff;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
     border-bottom: solid 1px gray;
     padding: 10px;
 }
 
-.tray-btn > *:hover{
+.tray-btn>*:hover {
     opacity: 0.3;
 }
 
-.email-details-btns > *{
+.email-details-btns>* {
     background-color: #fff;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
     border: 1px solid gray;
@@ -60,10 +62,10 @@ border: 1px solid red;
     cursor: pointer;
 }
 
-.emails-details-main{
+.emails-details-main {
     background-color: #fff;
 }
 
-.emails-details-main h1{
+.emails-details-main h1 {
     font-size: 3.5rem;
 }
