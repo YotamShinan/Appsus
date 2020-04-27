@@ -1,4 +1,4 @@
-import utils from '../../../services/utileService.js'
+import utils from '../../../services/utilService.js'
 
 export default class Note {
     constructor(type, info) {

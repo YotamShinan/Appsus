@@ -1,6 +1,6 @@
 // import React from 'react'
 import services from '../services/keepService.js'
-import { makeId } from '../../../services/utileService.js'
+import { makeId } from '../../../services/utilService.js'
 // import eventBusService from '../../../services/eventBusService.js'
 
 export default class AddNote extends React.Component {

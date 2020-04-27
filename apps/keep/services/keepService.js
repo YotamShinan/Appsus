@@ -1,4 +1,4 @@
-import utils from '../../../services/utileService.js'
+import utils from '../../../services/utilService.js'
 import Note from './noteModel.js'
 import storageService from '../../../services/storageService.js'
 

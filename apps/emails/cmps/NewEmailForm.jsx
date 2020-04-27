@@ -1,10 +1,6 @@
 const { Link } = ReactRouterDOM
 
-<<<<<<< HEAD
-
-
-=======
-import util from '../../../services/util-service.js';
+import util from '../../../services/utilService.js';
 import emailService from '../services/emailService.js';
 
 export class NewEmailForm extends React.Component {
@@ -37,7 +33,7 @@ export class NewEmailForm extends React.Component {
               </form>
     }
 }
->>>>>>> ca5f3901c88b41a0e27d6d2d11772be87d450f8d
+
 
 {/* <form className="flex column new-mail-form" onSubmit={ this.onFormSubmit } action="" method="post">
     <div className="new-mail-form-title">{ this.state.formTitle }</div>

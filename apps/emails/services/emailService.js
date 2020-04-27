@@ -1,4 +1,4 @@
-import util from '../../../services/util-service.js'
+import util from '../../../services/utilService.js'
 
 export default {
     query,
@@ -17,10 +17,10 @@ function query(filter){
     return gEmails;
 }
 
-const gEmails = [{id: '1', subject: 'Wassap?', body: 'Pick up!',
+const gEmails = [{id: util.makeId(), subject: 'Wassap?', body: 'Pick up!',
                  isRead: true, sentAt : 1551133930594, sender: 'Dan', 
                  senderAddress:'address@gmail.com', isStarred: true, isTrash: true},
-                 {id: '2', subject: 'manshma?', body: 'hello there!', 
+                 {id: util.makeId(), subject: 'manshma?', body: 'hello there!', 
                  isRead: false, sentAt : 1551133930594, sender: 'Dan', 
                  senderAddress:'my@gmail.com', isStarred: false, isTrash: false}]
 
@@ -84,7 +84,7 @@ function createEmail(subject, body, senderAddress){
         isStarred: false,
         isTrash: false,
     }
-    gEmails.push(newMail);
+    gEmails.unshift(newMail);
 }
 
 createEmail('New Email', 'Done at createEmail', 'stam@stam.com')
