@@ -1,9 +1,9 @@
 // import React from 'react'
 import services from '../services/keepService.js'
-import { makeId } from '../../../services/Utils.js'
+import { makeId } from '../../../services/utileService.js'
 // import eventBusService from '../../../services/eventBusService.js'
 
-export default class CreateNote extends React.Component {
+export default class AddNote extends React.Component {
     state = {
         type: '',
         text: '',
@@ -11,8 +11,7 @@ export default class CreateNote extends React.Component {
     }
 
     componentDidMount() {
-        console.log('CreateNote mounted!');
-        
+
     }
 
     onInputChange = (ev) => {
@@ -22,42 +21,41 @@ export default class CreateNote extends React.Component {
     onAddNote = (ev) => {
         ev.preventDefault();
         if (!this.state.text) return;
-        const details = this.setDetails()
-        console.log('details:', details);
-        
-        services.addNote(this.state.type, details)
+        const info = this.setInfo()
+        console.log('info:', info);
+        services.addNote(this.state.type, info)
             .then(this.props.loadNotes);
         // eventBusService.callModal('updatesModal', { type: 'success', message: 'Note was successfully added' });
 
         this.setState({ text: '' })
     }
 
-    setDetails = () => {
-        let details = {};
+    setInfo = () => {
+        let info = {};
         switch (this.state.type) {
             case 'txt':
-                details.txt = this.state.text
+                info.txt = this.state.text
                 break;
             case 'img':
-                details.url = this.state.text
+                info.url = this.state.text
             case 'video':
-                details.url = this.state.text
+                info.url = this.state.text
                 break;
             case 'maps':
-                details.place = this.state.text
+                info.place = this.state.text
                 break;
             case 'music':
-                details.url = this.state.text
+                info.url = this.state.text
                 break;
             case 'todo':
-                details.todos = []
-                this.state.text.split(',').map(txt => details.todos.push({ id: makeId(), txt, isDone: false }))
+                info.todos = []
+                this.state.text.split(',').map(txt => info.todos.push({ id: makeId(), txt, isDone: false }))
                 break;
             default:
-                details.txt = this.state.text
+                info.txt = this.state.text
                 break;
         }
-        return details
+        return info
     }
 
     onTypeChange = (ev) => {
@@ -114,7 +112,7 @@ export default class CreateNote extends React.Component {
     render() {
         return <form className="add-note-form flex justify-center" onSubmit={ this.onAddNote }>
             <div className="add-note-container flex column">
-                <input placeholder={ this.state.placeholder } onChange={ this.onInputChange } value={ this.state.text } type="search" name="add-note" id="" />
+                <input autoComplete='off' placeholder={ this.state.placeholder } onChange={ this.onInputChange } value={ this.state.text } type="search" name="add-note" id="" />
                 { this.types }
             </div>
         </form>

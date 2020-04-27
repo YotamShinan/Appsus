@@ -1,4 +1,4 @@
-export default function TodoCmp(props) {
+export default function TodoNotePreview(props) {
     const { note } = props;
     const title = note.info.title;
     const todos = note.info.todos;

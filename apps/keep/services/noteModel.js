@@ -1,12 +1,12 @@
-import utils from '../../../services/util-service.js'
+import utils from '../../../services/utileService.js'
 
 export default class Note {
-    constructor(type, details) {
+    constructor(type, info) {
+        this.type = type
         this.id = utils.makeId()
         this.title = ''
-        this.type = type
         this.isPinned = false
-        this.details = details
+        this.info = info
         this.style = {
             backgroundColor: '',
             color: 'black'

@@ -1,17 +1,18 @@
 
-import TxtCmp from '../cmps/PreviewTextNote.jsx'
-import TodoCmp from '../cmps/PreviewTodoNote.jsx'
-import ImgCmp from '../cmps/PreviewImgNote.jsx'
-import VidCmp from '../cmps/PreviewVideoNote.jsx'
+import TextNotePreview from '../cmps/TextNotePreview.jsx'
+import TodoNotePreview from '../cmps/TodoNotePreview.jsx'
+import ImgNotePreview from '../cmps/ImgNotePreview.jsx'
+import VideoNotePreview from '../cmps/VideoNotePreview.jsx'
 
 export default function NotesPreview(props){
-    const { note } = props
+    const { note } = props;
+    
     return (
         <div className="note-preview">
-            {note.type === "NoteText" && <TxtCmp note={note} />}
-            {note.type === "NoteTodos" && <TodoCmp note={note} />}
-            {note.type === "NoteImg" && <ImgCmp note={note}  />}
-            {/* {note.type === "NoteVid" && <VidCmp note={note}  />} */}
+            {note.type === "txt" && <TextNotePreview note={note} />}
+            {note.type === "todo" && <TodoNotePreview note={note} />}
+            {note.type === "img" && <ImgNotePreview note={note}  />}
+            {note.type === "video" && <VideoNotePreview note={note}  />}
         </div>
     );
 };

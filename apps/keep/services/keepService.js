@@ -1,6 +1,6 @@
-import utils from '../../../services/util-service.js'
-import Note from '../services/noteModel.js'
-import storageService from '../../../services/storage-service.js'
+import utils from '../../../services/utileService.js'
+import Note from './noteModel.js'
+import storageService from '../../../services/storageService.js'
 
 export default {
     query,
@@ -14,22 +14,20 @@ var gNotes = null;
 
 function query() {
     if (!gNotes) {
-        createTestNotes();
-        console.log(gNotes);
-        return gNotes
-    } else return gNotes
+        loadNotes()
+    }
+    return gNotes
 }
 
 
-function addNote(type, details /*isDraft = false*/ ) {
+function addNote(type, info /*isDraft = false*/ ) {
     console.log('addNote at Services');
     loadNotes()
     gNotes = JSON.parse(JSON.stringify(gNotes))
-    const newNote = new Note(type, details)
+    const newNote = new Note(type, info)
     gNotes.push(newNote)
     saveNotes()
     return Promise.resolve(newNote)
-
 }
 
 function loadNotes() {
@@ -44,7 +42,7 @@ function saveNotes() {
 
 function createTestNotes() {
     gNotes = [{
-            type: "NoteText",
+            type: "txt",
             id: utils.makeId(),
             isPinned: false,
             info: {
@@ -52,13 +50,12 @@ function createTestNotes() {
                 txt: "so much wow"
             },
             style: {
-                fontSize: 14,
-                fontColor: "pink",
-                background: "blue"
+                backgroundColor: "blue",
+                color: "pink",
             }
         },
         {
-            type: "NoteImg",
+            type: "img",
             id: utils.makeId(),
             isPinned: false,
             info: {
@@ -66,13 +63,12 @@ function createTestNotes() {
                 url: "https://i5.walmartimages.com/asr/209bb8a0-30ab-46be-b38d-58c2feb93e4a_1.1a15fb5bcbecbadd4a45822a11bf6257.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF"
             },
             style: {
-                fontSize: 14,
-                fontColor: "pink",
-                background: "blue"
+                backgroundColor: "blue",
+                color: "pink",
             }
         },
         {
-            type: "NoteTodos",
+            type: "todo",
             id: utils.makeId(),
             isPinned: true,
             info: {
@@ -84,9 +80,8 @@ function createTestNotes() {
                 ]
             },
             style: {
-                fontSize: 14,
-                fontColor: "pink",
-                background: "blue"
+                backgroundColor: "blue",
+                color: "pink",
             }
         }
     ];

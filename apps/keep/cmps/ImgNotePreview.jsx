@@ -1,4 +1,4 @@
-export default function ImgCmp(props) {
+export default function ImgNotePreview(props) {
     const { note } = props;
     const title = note.info.title;
     const url = note.info.url;

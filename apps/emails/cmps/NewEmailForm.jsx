@@ -1,15 +1,9 @@
 const { Link } = ReactRouterDOM
 
-export class NewEmailForm extends React.Component {
-    render() {
-        return (
-            <div className="new-email">
-            </div>
-            )
-        }
-    }
-    
-    {/* <form className="flex column new-mail-form" onSubmit={ this.onFormSubmit } action="" method="post">
+
+
+
+{/* <form className="flex column new-mail-form" onSubmit={ this.onFormSubmit } action="" method="post">
     <div className="new-mail-form-title">{ this.state.formTitle }</div>
     <span>
         <label htmlFor="new-mail-subject">To:</label>

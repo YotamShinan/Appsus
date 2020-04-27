@@ -1,5 +1,5 @@
 
-export default function TxtCmp(props) {
+export default function TextNotePreview(props) {
     const { note } = props;
     const text = note.info.txt;
     const title = note.info.title;
@@ -11,4 +11,3 @@ export default function TxtCmp(props) {
         </div>
     )
 }
-
