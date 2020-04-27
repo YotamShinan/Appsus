@@ -11,7 +11,6 @@ export default class Keep extends React.Component {
 
     componentDidMount() {
         this.loadNotes()
-
     }
 
     loadNotes = () => {
@@ -23,7 +22,7 @@ export default class Keep extends React.Component {
         const { notes, pinnedNotes } = this.state;
         return (
             <React.Fragment>
-                <AddNote />
+                <AddNote loadNotes={this.loadNotes}/>
                 <section className="notes-container flex column">
                     {/* {<PinnedNotes />} */}
                     {notes && <NotesList notes={notes} />}

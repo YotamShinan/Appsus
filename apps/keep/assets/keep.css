@@ -1,12 +1,15 @@
 .notes-container {
     background-color: inherit;
-    height: 80vh;
+    /* height: 80vh; */
     padding: 20px;
 }
 
 .note-preview {
     /* background-color: white; */
     width: 350px;
+    display: flex;
+    margin-bottom: 15px;
+    margin-inline-end: auto;
 }
 
 .note {
@@ -15,17 +18,26 @@
     border: 2px solid white;
     opacity: 0.8;
     transition: 0.2s;
-    margin-bottom: 10px;
     margin-left: 10px;
+    align-self: stretch;
+    flex-grow: 1;
+    height: 100%;
+    box-shadow: 4px 0px 5px 0px rgba(133, 101, 133, 1);
 }
 
 .note:hover {
+    /* box-shadow: 4px 2px 5px 2px rgba(133, 101, 133, 1); */
+    opacity: 1;
+}
+
+.note:hover>.note-remove-btn {
     opacity: 1;
     box-shadow: 4px 0px 5px 0px rgba(133, 101, 133, 1);
 }
 
 .notes-list {
-    max-height: 100%;
+    /* max-height: 100%; */
+    max-width: 100%;
 }
 
 .text-note {
@@ -78,4 +90,17 @@ input[type="radio"] {
 .types-container i:hover {
     color: yellow;
     cursor: pointer;
+}
+
+.types-container i:focus {
+    color: yellow;
+}
+
+.note-tools {
+    justify-self: flex-end;
+    margin-top: 20px
+}
+
+.note-tools li i {
+    font-size: 1.5em
 }

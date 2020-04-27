@@ -39,7 +39,7 @@ export class EmailDetails extends React.Component {
     onToggleRead = () => {
         emailService.toggleRead(this.state.email.id)
             .then((email) => {
-                console.log(email, 'Email marked as read / unread');
+                // console.log(email, 'Email marked as read / unread');
                 this.props.history.push('/emails/')
             })
             .catch(err => {

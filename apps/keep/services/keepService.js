@@ -20,9 +20,8 @@ function query() {
 }
 
 
-function addNote(type, info /*isDraft = false*/ ) {
-    console.log('addNote at Services');
-    loadNotes()
+function addNote(type, info) {
+    // loadNotes()
     gNotes = JSON.parse(JSON.stringify(gNotes))
     const newNote = new Note(type, info)
     gNotes.push(newNote)

@@ -1,11 +1,11 @@
 // import React from 'react'
 import services from '../services/keepService.js'
-import { makeId } from '../../../services/utilService.js'
+import makeId from '../../../services/utilService.js'
 // import eventBusService from '../../../services/eventBusService.js'
 
 export default class AddNote extends React.Component {
     state = {
-        type: '',
+        type: 'txt',
         text: '',
         placeholder: 'Add a new note right here, friend'
     }
@@ -22,7 +22,6 @@ export default class AddNote extends React.Component {
         ev.preventDefault();
         if (!this.state.text) return;
         const info = this.setInfo()
-        console.log('info:', info);
         services.addNote(this.state.type, info)
             .then(this.props.loadNotes);
         // eventBusService.callModal('updatesModal', { type: 'success', message: 'Note was successfully added' });
@@ -34,7 +33,7 @@ export default class AddNote extends React.Component {
         let info = {};
         switch (this.state.type) {
             case 'txt':
-                info.txt = this.state.text
+                info.title = this.state.text
                 break;
             case 'img':
                 info.url = this.state.text
@@ -49,10 +48,10 @@ export default class AddNote extends React.Component {
                 break;
             case 'todo':
                 info.todos = []
-                this.state.text.split(',').map(txt => info.todos.push({ id: makeId(), txt, isDone: false }))
+                this.state.text.split(',').map(txt => info.todos.push({ id: makeId.makeId(), txt, isDone: false }))
                 break;
             default:
-                info.txt = this.state.text
+                info.title = this.state.text
                 break;
         }
         return info

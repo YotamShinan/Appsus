@@ -10,7 +10,7 @@ export class NewEmailForm extends React.Component {
         body: ''
     }
     componentDidUpdate() {
-        console.log(this.state.subject)
+        // console.log(this.state.subject)
     }
     onAddEmail = (ev) => {
         ev.preventDefault();
