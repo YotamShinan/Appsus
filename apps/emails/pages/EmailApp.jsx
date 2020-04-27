@@ -1,10 +1,3 @@
-
-
-
-// export default function EmailApp() {
-//     return <h1>I am an Email APP!!!</h1>
-// }
-
 import emailService from "../services/emailService.js";
 import {EmailList} from "../cmps/EmailList.jsx"
 import {EmailDetails} from "../cmps/EmailDetails.jsx"
@@ -22,22 +15,28 @@ export default class EmailApp extends React.Component {
     componentDidMount() {
         this.loadEmails()
     }
+    componentDidUpdate(prevProps){
+        if (prevProps.match.params.filterBy !== this.props.match.params.filterBy) {
+        this.loadEmails()
+        }
+    }
     loadEmails = () =>{
-        const emails = emailService.query();
+        const filterBy = this.props.match.params.filterBy;
+        console.log('filter by', filterBy)
+        const emails = emailService.query(filterBy);
         this.setState({emails});
     }
 
     render() {
         const {emails} = this.state;
-        // console.log(emails)
         return (
             <Router>
                 <section  className="emails-container flex">
                         <SideNav/>
                         <Switch>
-                            <Route  component={NewEmailForm}  path="/emails/new" />
-                            <Route  component={EmailDetails}  path="/emails/:emailId" />
-                            <Route  component={() => <EmailList emails={emails}/> }  path="/emails/" />
+                            <Route  exact component={NewEmailForm}  path="/emails/new" />
+                            <Route  exact component={EmailDetails}  path="/emails/:emailId" />
+                            <Route  component={() => <EmailList emails={emails}/> }  path="/emails" />
                         {/* {emails && <EmailList emails={emails} />} */}
                         </Switch>
                 </section>

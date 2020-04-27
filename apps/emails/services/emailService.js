@@ -7,18 +7,34 @@ export default {
     toggleTrash
 }
 
-function query(){
+function query(filter){
+    if (filter === 'inbox') return getInbox();
+    if (filter === 'trash') return getTrash();
+    if (filter === 'starred') return getStarred();
     return gEmails;
 }
 
 const gEmails = [{id: '1', subject: 'Wassap?', body: 'Pick up!',
                  isRead: true, sentAt : 1551133930594, sender: 'Dan', 
-                 senderAddress:'address@gmail.com', isStarred: false, isTrash: false},
+                 senderAddress:'address@gmail.com', isStarred: true, isTrash: true},
                  {id: '2', subject: 'manshma?', body: 'hello there!', 
                  isRead: false, sentAt : 1551133930594, sender: 'Dan', 
                  senderAddress:'my@gmail.com', isStarred: false, isTrash: false}]
 
+function getTrash(){
+    const result = gEmails.filter(email => email.isTrash);
+    return result;
+}
 
+function getStarred(){
+    const result = gEmails.filter(email => email.isStarred);
+    return result;
+}
+
+function getInbox(){
+    const result = gEmails.filter(email => !email.isTrash);
+    return result;
+}
 
 function getById(emailId) {
 const email = gEmails.find(email => email.id === emailId)
