@@ -16,6 +16,10 @@ a {
     text-decoration: none;
 }
 
+div a i {
+    text-decoration: none;
+}
+
 input[type="radio"] {
     display: none;
 }
@@ -61,11 +65,11 @@ header img:hover {
 }
 
 .main-nav-list a:hover {
-    color: #d7f70a;
+    color: #0abde3;
 }
 
 a.main-nav-active {
-    color: #d7f70a;
+    color: #0abde3;
 }
 
 
@@ -133,17 +137,23 @@ a.main-nav-active {
     align-items: stretch;
 }
 
+
 /* ________TODO_>>_DESIGN_THE_USER_MSG________ */
 
 .user-msg {
     background-color: aliceblue;
-    position: absolute;
-    bottom:0;
-    right: 10px;
+    position: fixed;
     font-size: 1.2em;
     padding: 10px 20px;
-}
-
-.user-msg button {
-    float: right;
+    right: 3vw;
+    bottom: 5vh;
+    border: 2px solid darkslategray;
+    border-radius: 30px;
+    height: 75px;
+    width: 215px;
+    text-align: center;
+    font-family: 'Hind Madurai', sans-serif;
+    font-weight: 900;
+    color: #047204;
+    transition: 0.4s;
 }

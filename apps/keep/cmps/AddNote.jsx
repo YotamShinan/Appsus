@@ -1,7 +1,7 @@
-// import React from 'react'
+
 import services from '../services/keepService.js'
 import makeId from '../../../services/utilService.js'
-// import eventBusService from '../../../services/eventBusService.js'
+import eventBus from '../../../services/eventBusService.js';
 
 export default class AddNote extends React.Component {
     state = {
@@ -24,7 +24,7 @@ export default class AddNote extends React.Component {
         const info = this.setInfo()
         services.addNote(this.state.type, info)
             .then(this.props.loadNotes);
-        // eventBusService.callModal('updatesModal', { type: 'success', message: 'Note was successfully added' });
+            eventBus.emit('show-msg', {txt: 'Yayy! New note!'})
 
         this.setState({ text: '' })
     }

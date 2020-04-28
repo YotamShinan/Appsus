@@ -1,6 +1,8 @@
 import keepService from '../services/keepService.js';
 import NotesList from '../cmps/NotesList.jsx';
 import AddNote from '../cmps/AddNote.jsx'
+import eventBus from '../../../services/eventBusService.js';
+
 
 export default class Keep extends React.Component {
 
@@ -23,6 +25,8 @@ export default class Keep extends React.Component {
     onRemoveNote = (noteId) => {
         keepService.removeNoteById(noteId)
         this.loadNotes();
+        eventBus.emit('show-msg', {txt: 'You just threw it away!'})
+
     }
 
     onToggleIsPinned = (noteId) => {

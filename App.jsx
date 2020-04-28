@@ -22,7 +22,7 @@ export class App extends React.Component {
         return (
             <Router>
                 <header className="appsus-header flex space-between align-center">
-                <NavLink exact to='/'><img alt="logo" src="./assets/img/logo.png"></img></NavLink>
+                <NavLink exact to='/'><img alt="logo" src="./assets/img/logoNevo.png"></img></NavLink>
                     <NavBar history={history}></NavBar>
                 </header>
                 <main>
@@ -33,11 +33,11 @@ export class App extends React.Component {
                         {/* <Route component={BookApp} path="/books" /> */}
                         <Route component={Home} path="/" />
                     </Switch>
-                </main>
-                <footer>
                     <UserMsg></UserMsg>
+                </main>
+                {/* <footer>
                     copyrights 2020 &copy;
-                </footer>
+                </footer> */}
             </Router>
         )
     }
