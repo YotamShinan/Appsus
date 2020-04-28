@@ -1,5 +1,5 @@
-@import url('../apps/emails/assets/emails.css');
-@import url('../apps/keep/assets/keep.css');
+@import url('../../apps/emails/assets/emails.css');
+@import url('../../apps/keep/assets/keep.css');
 * {
     box-sizing: border-box;
     margin: 0;
@@ -14,6 +14,10 @@ body {
 
 a {
     text-decoration: none;
+}
+
+input[type="radio"] {
+    display: none;
 }
 
 
@@ -51,13 +55,17 @@ header img:hover {
 }
 
 .main-nav-list a {
-    color: #d7f70a;
+    color: white;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .main-nav-list a:hover {
-    color: white;
+    color: #d7f70a;
+}
+
+a.main-nav-active {
+    color: #d7f70a;
 }
 
 
@@ -113,7 +121,7 @@ header img:hover {
 
 .clean-list {
     list-style-type: none;
-    margin: 0;
+    /* margin: 0; */
     padding: 0;
 }
 

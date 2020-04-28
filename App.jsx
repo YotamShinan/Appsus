@@ -22,7 +22,7 @@ export class App extends React.Component {
         return (
             <Router>
                 <header className="appsus-header flex space-between align-center">
-                <NavLink exact to='/'><img alt="logo" src="./img/logo.png"></img></NavLink>
+                <NavLink exact to='/'><img alt="logo" src="./assets/img/logo.png"></img></NavLink>
                     <NavBar history={history}></NavBar>
                 </header>
                 <main>

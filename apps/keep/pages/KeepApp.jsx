@@ -15,7 +15,20 @@ export default class Keep extends React.Component {
 
     loadNotes = () => {
         const notes = keepService.query()
-        this.setState({ notes })
+        const pinnedNotes = keepService.getPinnedNotes()
+        this.setState({ notes, pinnedNotes })
+        
+    }  
+    
+    onRemoveNote = (noteId) => {
+        keepService.removeNoteById(noteId)
+        this.loadNotes();
+    }
+
+    onToggleIsPinned = (noteId) => {
+        keepService.toggleIsPinned(noteId)
+        .then(this.loadNotes)
+        
     }
 
     render() {
@@ -23,10 +36,12 @@ export default class Keep extends React.Component {
         return (
             <React.Fragment>
                 <AddNote loadNotes={this.loadNotes}/>
+                <section className="pinned-notes-container flex">
+                    {pinnedNotes && <NotesList notes={pinnedNotes} onRemoveNote={this.onRemoveNote} onToggleIsPinned={this.onToggleIsPinned} />}
+                </section>
+                <br />
                 <section className="notes-container flex column">
-                    {/* {<PinnedNotes />} */}
-                    {notes && <NotesList notes={notes} />}
-                    {/* {<NotesList notes={notes.filter(note => note.isPinned)} />} */}
+                    {notes && <NotesList notes={notes} onRemoveNote={this.onRemoveNote} onToggleIsPinned={this.onToggleIsPinned} />}
                 </section>
 
             </React.Fragment>
