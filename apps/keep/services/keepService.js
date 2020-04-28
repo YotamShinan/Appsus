@@ -7,6 +7,11 @@ export default {
     addNote,
     loadNotes,
     saveNotes,
+    getNoteById,
+    updateNoteById,
+    removeNoteById,
+    getPinnedNotes,
+    toggleIsPinned,
 
 };
 
@@ -16,12 +21,12 @@ function query() {
     if (!gNotes) {
         loadNotes()
     }
-    return gNotes
+    saveNotes();
+    return gNotes.filter(note => !note.isPinned);
 }
 
 
 function addNote(type, info) {
-    // loadNotes()
     gNotes = JSON.parse(JSON.stringify(gNotes))
     const newNote = new Note(type, info)
     gNotes.push(newNote)
@@ -37,6 +42,42 @@ function loadNotes() {
 function saveNotes() {
     storageService.saveToStorage('notes', gNotes)
 }
+
+function getNoteById(noteId) {
+    let noteById = gNotes.find(note => note.id === noteId)
+    return Promise.resolve(...[noteById])
+}
+
+function getNoteIdxById(noteId) {
+    return gNotes.findIndex(note => note.id === noteId)
+}
+
+function updateNoteById(noteId, updates) {
+    getNoteById(noteId).then(noteToUpdate => {
+        noteToUpdate.info[updates.field] = updates.txt
+        saveNotes();
+    })
+}
+
+function removeNoteById(noteId) {
+    let noteIdx = getNoteIdxById(noteId);
+    gNotes.splice(noteIdx, 1);
+}
+
+function getPinnedNotes() {
+    let pinnedNotes = gNotes.filter(note => note.isPinned);
+    return pinnedNotes
+}
+
+function toggleIsPinned(noteId) {
+    return getNoteById(noteId).then(noteToUpdate => {
+        noteToUpdate.isPinned = !noteToUpdate.isPinned;
+        saveNotes();
+    })
+}
+
+
+
 
 
 function createTestNotes() {
@@ -86,6 +127,26 @@ function createTestNotes() {
     ];
 }
 
+// function updateNoteById(noteId, updates) {
+
+//     getNoteById(noteId).then(noteToUpdate => {
+//         for (let field in updates) {
+//             if (updates[field].todos) noteToUpdate[field].todos = updateTodos(noteToUpdate[field].todos, updates[field].todos)
+//             else if (updates.style) noteToUpdate[field] = {...noteToUpdate[field], ...updates[field] }
+//             else noteToUpdate[field] = updates[field];
+//         }
+//         gNotes = gNotes.map(note => (note.id === noteToUpdate.id) ? noteToUpdate : note)
+//         saveNotes()
+//     })
+//     return Promise.resolve(true);
+// }
+
+// function updateTodos(todosToUpdate, updatedTodo) {
+//     let newTodos = todosToUpdate.map(todo => (todo.id === updatedTodo.id) ? updatedTodo : todo)
+//     return [...newTodos]
+// }
+
+
 
 // function deleteNote(noteId) {
 //     let noteIdx = getNoteIdxById(noteId)
@@ -95,14 +156,8 @@ function createTestNotes() {
 //     return Promise.resolve(true)
 // }
 
-// function getNoteIdxById(noteId) {
-//     return gNotes.findIndex(note => note.id === noteId)
-// }
 
-// function getNoteById(noteId) {
-//     let foundNote = gNotes.find(note => note.id === noteId)
-//     return Promise.resolve(...[foundNote])
-// }
+
 
 // function getNotesToRender(searchString) {
 
@@ -136,24 +191,7 @@ function createTestNotes() {
 //     })
 // }
 
-// function updateNoteById(noteId, updates) {
 
-//     getNoteById(noteId).then(noteToUpdate => {
-//         for (let field in updates) {
-//             if (updates[field].todos) noteToUpdate[field].todos = updateTodos(noteToUpdate[field].todos, updates[field].todos)
-//             else if (updates.style) noteToUpdate[field] = { ...noteToUpdate[field], ...updates[field] }
-//             else noteToUpdate[field] = updates[field];
-//         }
-//         gNotes = gNotes.map(note => (note.id === noteToUpdate.id) ? noteToUpdate : note)
-//         saveNotes()
-//     })
-//     return Promise.resolve(true);
-// }
-
-// function updateTodos(todosToUpdate, updatedTodo) {
-//     let newTodos = todosToUpdate.map(todo => (todo.id === updatedTodo.id) ? updatedTodo : todo)
-//     return [...newTodos]
-// }
 
 // function togglePin(noteId) {
 //     gNotes = JSON.parse(JSON.stringify(gNotes))
