@@ -124,3 +124,18 @@ header img:hover {
 .items-stretch {
     align-items: stretch;
 }
+
+/* ________TODO_>>_DESIGN_THE_USER_MSG________ */
+
+.user-msg {
+    background-color: aliceblue;
+    position: absolute;
+    bottom:0;
+    right: 10px;
+    font-size: 1.2em;
+    padding: 10px 20px;
+}
+
+.user-msg button {
+    float: right;
+}

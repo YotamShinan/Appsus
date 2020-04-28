@@ -1,4 +1,6 @@
 import emailService from "../services/emailService.js";
+import eventBus from '../../../services/eventBusService.js';
+
 const { Link } = ReactRouterDOM
 
 const STAR = '★';
@@ -18,6 +20,7 @@ export class EmailDetails extends React.Component {
     onRemoveEmail = () => {
         emailService.remove(this.state.email.id)
             .then(() => {
+                eventBus.emit('show-msg', {txt: 'Email deleted successfully!'})
                 this.props.history.push('/emails/')
             })
             .catch(err => {
@@ -39,6 +42,10 @@ export class EmailDetails extends React.Component {
     onToggleRead = () => {
         emailService.toggleRead(this.state.email.id)
             .then((email) => {
+                if (email.isRead) 
+                eventBus.emit('show-msg', {txt: 'Email marked as read successfully!'})
+                else eventBus.emit('show-msg', {txt: 'Email marked as unread successfully!'})
+
                 this.props.history.push('/emails/')
             })
             .catch(err => {
@@ -49,6 +56,10 @@ export class EmailDetails extends React.Component {
     onToggleTrash = () => {
         emailService.toggleTrash(this.state.email.id)
             .then((email) => {
+                if (email.isTrash) 
+                eventBus.emit('show-msg', {txt: 'Email moved to trash successfully!'})
+                else eventBus.emit('show-msg', {txt: 'Email moved to Inbox successfully!'})
+
                 this.props.history.push('/emails/')
 
             })
@@ -70,7 +81,7 @@ export class EmailDetails extends React.Component {
                             <Link to="/emails/">Back</Link>
                             <button to="/emails/" onClick={this.onToggleTrash}>Move to {(email.isTrash) ? "Inbox" : "Trash"}</button>
                             <button onClick={this.onToggleStarEmail} className={(email.isStarred) ? "starred" : ""}>{STAR}</button>
-                            <button onClick={this.onToggleRead} >{(email.isRead) ? "Mark as unread" : "Mark as read"}</button>
+                            <button onClick={this.onToggleRead} >Mark as unread</button>
                             {email.isTrash && <button onClick={this.onRemoveEmail}>Delete</button>}
 
                         </div>

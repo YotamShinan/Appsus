@@ -1,4 +1,5 @@
 import util from '../../../services/utilService.js'
+import storageService from '../../../services/storageService.js'
 
 export default {
     query,
@@ -8,57 +9,94 @@ export default {
     toggleRead,
     toggleTrash,
     createEmail,
-    numOfUnread
+    numOfUnread,
+    querySearch
+}
+
+const gDefaultEmails = [{
+    id: util.makeId(),
+    subject: 'Wassap?',
+    body: 'Pick up!',
+    isRead: true,
+    sentAt: 1551133930594,
+    sender: util.makeLoremSender(),
+    senderAddress: 'address@gmail.com',
+    isStarred: true,
+    isTrash: true
+},
+{
+    id: util.makeId(),
+    subject: 'manshma?',
+    body: 'hello there!',
+    isRead: false,
+    sentAt: 1551133930594,
+    sender: util.makeLoremSender(),
+    senderAddress: 'my@gmail.com',
+    isStarred: false,
+    isTrash: false
+},
+{
+    id: util.makeId(),
+    subject: 'New Email',
+    body: 'Done at createEmail',
+    isRead: false,
+    sentAt: 155118390594,
+    sender: util.makeLoremSender(),
+    senderAddress: 'stam@gmail.com',
+    isStarred: false,
+    isTrash: false
+}
+]
+
+
+const STORAGE_KEY = 'emails'
+var gEmails = null;
+
+createEmails();
+
+function createEmails(){
+    gEmails = storageService.loadFromStorage(STORAGE_KEY);
+    if (!gEmails){
+        gEmails = gDefaultEmails;
+        storageService.saveToStorage(STORAGE_KEY, gEmails)
+    }
 }
 
 function query(filter) {
-    if (filter === 'inbox') return getInbox();
-    if (filter === 'trash') return getTrash();
-    if (filter === 'starred') return getStarred();
-    if (filter === 'unread') return getUnread();
-    return gEmails;
+    if (filter === 'inbox') return Promise.resolve(_getInbox());
+    if (filter === 'trash') return Promise.resolve(_getTrash());
+    if (filter === 'starred') return Promise.resolve(_getStarred());
+    if (filter === 'unread') return Promise.resolve(_getUnread());
+    return Promise.resolve(gEmails);
 }
 
-const gEmails = [{
-        id: util.makeId(),
-        subject: 'Wassap?',
-        body: 'Pick up!',
-        isRead: true,
-        sentAt: 1551133930594,
-        sender: 'Dan',
-        senderAddress: 'address@gmail.com',
-        isStarred: true,
-        isTrash: true
-    },
-    {
-        id: util.makeId(),
-        subject: 'manshma?',
-        body: 'hello there!',
-        isRead: false,
-        sentAt: 1551133930594,
-        sender: 'Dan',
-        senderAddress: 'my@gmail.com',
-        isStarred: false,
-        isTrash: false
-    }
-]
+function querySearch(filterBy){
+    let filter = filterBy.toLowerCase();
+    let emails = gEmails.filter(email =>   
+                                            (email.subject.toLowerCase().includes(filter) || 
+                                            email.body.toLowerCase().includes(filter) ||
+                                            email.sender.toLowerCase().includes(filter))
+                                        )
+    return Promise.resolve(emails);
+}
 
-function getTrash() {
+
+function _getTrash() {
     const result = gEmails.filter(email => email.isTrash);
     return result;
 }
 
-function getUnread() {
+function _getUnread() {
     const result = gEmails.filter(email => !email.isRead);
     return result;
 }
 
-function getStarred() {
+function _getStarred() {
     const result = gEmails.filter(email => email.isStarred);
     return result;
 }
 
-function getInbox() {
+function _getInbox() {
     const result = gEmails.filter(email => !email.isTrash);
     return result;
 }
@@ -71,6 +109,7 @@ function getById(emailId) {
 function remove(emailId) {
     const emailIdx = _getIdxById(emailId)
     gEmails.splice(emailIdx, 1)
+    storageService.saveToStorage(STORAGE_KEY, gEmails)
     return Promise.resolve();
 }
 
@@ -109,6 +148,7 @@ function createEmail(subject, body, senderAddress) {
         isTrash: false,
     }
     gEmails.unshift(newMail);
+    storageService.saveToStorage(STORAGE_KEY, gEmails)
 }
 
 function numOfUnread() {
@@ -116,5 +156,3 @@ function numOfUnread() {
     gEmails.forEach(email => { if (!email.isRead) counter++ });
     return counter;
 }
-
-createEmail('New Email', 'Done at createEmail', 'stam@stam.com')

@@ -1,20 +1,23 @@
-const { Link } = ReactRouterDOM
-
+import eventBus from '../../../services/eventBusService.js'
 import util from '../../../services/utilService.js';
 import emailService from '../services/emailService.js';
 
+const { Link } = ReactRouterDOM
 export class NewEmailForm extends React.Component {
     state = {
         subject: '',
         address: '',
         body: ''
     }
-    componentDidUpdate() {
+    componentDidMount() {
+        console.log(this.props);
+       const params= new URLSearchParams('?body=popo&subject=ernest')
         // console.log(this.state.subject)
     }
     onAddEmail = (ev) => {
         ev.preventDefault();
-        emailService.createEmail(this.state.subject, this.state.address, this.state.body)
+        emailService.createEmail(this.state.subject, this.state.body, this.state.address)
+        eventBus.emit('show-msg', {txt: 'Email sent!'})
         this.props.history.push('/emails/')
     }
     onInputChange = (ev) => {
@@ -27,33 +30,9 @@ export class NewEmailForm extends React.Component {
                     <div className="add-email-container flex column">
                         <input className="email-input-subject" autoComplete="off" placeholder="subject" onChange={this.onInputChange} value={this.state.subject} type="search" name="subject" id="" />
                         <input className="email-input-address" autoComplete="off" placeholder="send to:" onChange={this.onInputChange} value={this.state.address} type="search" name="address" id="" />
-                        {/* <input autoComplete="off" placeholder="write your email here" onChange={this.onInputChange} value={this.state.body} type="search" name="body" id="" /> */}
-                        <textarea className="email-input-body"  name="body" value={ this.state.body } onChange={ this.onInputChange} placeholder="Your text..." required></textarea>
-                        
+                        <textarea className="email-input-body"  name="body" value={ this.state.body } onChange={ this.onInputChange} placeholder="Your text..." required></textarea> 
                         <button className="send-email-btn"><i className="fas fa-paper-plane"></i></button>
                     </div>
               </form>
     }
 }
-
-
-{/* <form className="flex column new-mail-form" onSubmit={ this.onFormSubmit } action="" method="post">
-    <div className="new-mail-form-title">{ this.state.formTitle }</div>
-    <span>
-        <label htmlFor="new-mail-subject">To:</label>
-        <input type="email" id="new-mail-to" name="to" value={ this.state.to } onChange={ this.handleChange } placeholder="E.g John@gmail.com" required />
-    </span>
-    <span>
-        <label htmlFor="new-mail-cc">Cc:</label>
-        <input type="text" id="new-mail-cc" name="cc" value={ this.state.cc } onChange={ this.handleChange } placeholder="Copies, seperate by commas" />
-    </span>
-    <span>
-        <label htmlFor="new-mail-subject">Subject:</label>
-        <input type="text" id="new-mail-subject" name="subject" value={ this.state.subject } onChange={ this.handleChange } placeholder="Mail Subject" required />
-    </span>
-    <textarea name="body" value={ this.state.body } onChange={ this.handleChange } placeholder="Your text..." required></textarea>
-    <div className="new-mail-form-buttons flex space-between align-center">
-        <button onClick={ this.onModalClose } className="dismiss simple-button normal-trans">&times;</button>
-        <button className="send simple-button normal-trans"><i className="fas fa-paper-plane"></i></button>
-    </div>
-    </form> */}

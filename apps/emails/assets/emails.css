@@ -20,12 +20,33 @@
     font-weight: bold;
     color: #dfe6e9;
     border: 2px solid white;
+    background-color: #f5f6fa;
+    color: #0c0c0e;
+    font-weight: bolder;
+    font-size: 1.3em;
 }
 
+.preview-subject {
+    font-size: 1.2em;
+}
+
+.unread-email.preview-subject {
+    font-size: 1.5em;
+}
+
+.preview-body{
+    font-size: 0.6em;
+}
+
+.unread-email.preview-body {
+    font-size: 1.8em;
+}
+
+
 .read-email {
-    background-color: #f5f6fa;
-    color: #353b48;
-    border: 1px solid white;
+    background-color: #c2c3c7c2;
+    color: #474c57;
+    border: 1px solid #c2c3c7;
 }
 
 .emails-table li {
@@ -120,17 +141,13 @@
     font-size: 3.5rem;
 }
 
-.active-filter {
+.email-nav-active {
     background-color: rgb(196, 169, 169);
 }
 
-.preview-body {
-    font-size: 0.8rem;
-}
 
-.preview-subject {
-    font-size: 1.2rem;
-}
+
+
 
 .emails-search-box {
     width: 100vw;

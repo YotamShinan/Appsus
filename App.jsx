@@ -3,6 +3,8 @@ const { Route, Switch, NavLink } = ReactRouterDOM
 const history = History.createBrowserHistory()
 
 import { NavBar } from './NavBar.jsx';
+import {UserMsg} from './UserMsg.jsx';
+
 
 // comment
 
@@ -33,6 +35,7 @@ export class App extends React.Component {
                     </Switch>
                 </main>
                 <footer>
+                    <UserMsg></UserMsg>
                     copyrights 2020 &copy;
                 </footer>
             </Router>
