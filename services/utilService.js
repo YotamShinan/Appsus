@@ -1,4 +1,4 @@
-export default { makeId };
+export default { makeId, makeLoremSender };
 
 function makeId(length = 5) {
     var txt = '';
@@ -8,5 +8,15 @@ function makeId(length = 5) {
         txt += possible.charAt(Math.floor(Math.random() * possible.length));
     }
 
+    return txt;
+}
+
+function makeLoremSender(size = 1) {
+    var words = ['Dan Battat', 'Ernest Hemignway', 'Yotam Shinan', 'NEVOeeee']
+    var txt = '';
+    while (size > 0) {
+        size--;
+        txt += words[Math.floor(Math.random() * words.length)] + ' ';
+    }
     return txt;
 }

@@ -5,9 +5,15 @@ import EmailPreview from './EmailPreview.jsx'
 export function EmailList(props) {
     // console.log(props)
     return (
-            <ul className="emails-table clean-list">
-                { props.emails.map( (email, idx) => 
-                <EmailPreview key={ idx } email = {email} /> )}
-            </ul>      
+        <React.Fragment>
+            <div className="emails-inner-container flex column">
+                <button className="emails-sort-btn">Sort by date</button>
+                
+                <ul className="emails-table clean-list">
+                    { props.emails.map( (email, idx) => 
+                    <EmailPreview key={ idx } email = {email} /> )}
+                </ul>  
+            </div>
+        </React.Fragment>    
             )
 }
