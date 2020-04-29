@@ -20,45 +20,64 @@ export default class Keep extends React.Component {
         const pinnedNotes = keepService.getPinnedNotes()
         this.setState({ notes, pinnedNotes })
     }
-    
-    onSendAsEmail = (noteId) => { 
+
+    onSendAsEmail = (noteId) => {
         keepService.getNoteInfoForSending(noteId)
-        .then((note) => this.props.history.push(`/emails/new/?subject=${note.info.title}&address=keepApp@google.com&body=${note.info.txt}`)
-        )
+            .then((note) => this.props.history.push(`/emails/new/?subject=${note.info.title}&address=keepApp@google.com&body=${note.info.txt}`)
+            )
     }
 
+
     onRemoveNote = (noteId) => {
-        keepService.removeNoteById(noteId)
-        this.loadNotes();
-        eventBus.emit('show-msg', {txt: 'You just threw it away!'})
+        Swal.fire({
+            title: 'For Real?',
+            text: "This beautiful note will be gone forever",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+
+        }).then((result) => {
+            if (result.value) {
+                keepService.removeNoteById(noteId)
+                this.loadNotes();
+                eventBus.emit('show-msg', { txt: 'You just threw it away!' })
+            }
+        })
     }
 
     onToggleIsPinned = (noteId) => {
         keepService.toggleIsPinned(noteId)
-        .then(this.loadNotes)
-        
+            .then(this.loadNotes)
+
     }
 
-    onToggleIsDone = (noteId, todoId) => {        
+    onToggleIsDone = (noteId, todoId) => {
         keepService.toggleTodoIsDone(noteId, todoId)
-        .then(this.loadNotes);
+            .then(this.loadNotes);
     }
 
-    onChangeNoteColor = (noteId, colorVal) => {
-        keepService.changeNoteColor(noteId, colorVal)
-        then(this.loadNotes);
+    onChangeNoteColor = (ev, noteId) => {
+        const colorVal = (ev.target.value);
+        const field = (ev.target.id);
+        keepService.updateNoteStyleById(noteId, { field, colorVal })
+            .then(this.loadNotes)
     }
 
-    onChangeFontColor = (noteId, colorVal) => {
-        keepService.changeFontColor(noteId, colorVal)
-        then(this.loadNotes);
+
+    onChangeFontColor = (ev, noteId) => {
+        const colorVal = (ev.target.value);
+        const field = (ev.target.id);
+        keepService.updateNoteStyleById(noteId, { field, colorVal })
+            .then(this.loadNotes)
     }
 
     render() {
         const { notes, pinnedNotes } = this.state;
         return (
             <React.Fragment>
-                <AddNote loadNotes={this.loadNotes}/>
+                <AddNote loadNotes={this.loadNotes} />
                 <section className="pinned-notes-container flex">
                     {pinnedNotes && <NotesList notes={pinnedNotes} onSendAsEmail={this.onSendAsEmail} onChangeNoteColor={this.onChangeNoteColor} onChangeFontColor={this.onChangeFontColor} onRemoveNote={this.onRemoveNote} onToggleIsDone={this.onToggleIsDone} onToggleIsPinned={this.onToggleIsPinned} />}
                 </section>
@@ -74,4 +93,5 @@ export default class Keep extends React.Component {
 }
 
 // ---------------------------- ******* ----------------------------------------------
+
 

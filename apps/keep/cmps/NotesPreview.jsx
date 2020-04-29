@@ -6,14 +6,14 @@ import VideoNotePreview from './NotePreviews/VideoNotePreview.jsx'
 
 export default function NotesPreview(props) {
     const { note } = props;
-    
+
     const NoteTools =
         <ul className="note-tools flex space-between clean-list">
             <li><i className="fas fa-map-pin" onClick={() => props.onToggleIsPinned(note.id)}></i></li>
             <li><i className="fas fa-palette">
-                <input onChange={() => props.onChangeNoteColor(note.id, this.value)} type="color" value="#1eb4e9" /></i></li>
+                <input onChange={() => props.onChangeNoteColor(event, note.id)} id="backgroundColor" type="color" value="#1eb4e9" /></i></li>
             <li><i className="fas fa-font">
-                <input onChange={() => props.onChangeFontColor(note.id, this.value)} type="color" value="#1eb4e9" /></i></li>
+                <input onChange={() => props.onChangeFontColor(event, note.id)} id="color" type="color" value="#1eb4e9" /></i></li>
             <li><i className="fas fa-trash-alt" onClick={() => props.onRemoveNote(note.id)}></i></li>
             
         </ul>

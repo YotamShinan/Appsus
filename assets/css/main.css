@@ -27,6 +27,8 @@ input[type="radio"] {
 
 input[type="color"] {
     opacity: 0;
+    margin-left: -30px;
+    cursor: pointer;
 }
 
 

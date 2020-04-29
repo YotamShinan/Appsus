@@ -14,6 +14,7 @@ export default {
     toggleIsPinned,
     toggleTodoIsDone,
     getNoteInfoForSending,
+    updateNoteStyleById
 
 };
 
@@ -59,6 +60,14 @@ function updateNoteById(noteId, updates) {
         noteToUpdate.info[updates.field] = updates.txt
         saveNotes();
     })
+}
+
+function updateNoteStyleById(noteId, updates) {
+    getNoteById(noteId).then(noteToUpdate => {
+        noteToUpdate.style[updates.field] = updates.colorVal
+        saveNotes();
+    })
+    return Promise.resolve();
 }
 
 function removeNoteById(noteId) {

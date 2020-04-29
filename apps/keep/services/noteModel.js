@@ -7,7 +7,7 @@ export default class Note {
         this.isPinned = false
         this.info = info
         this.style = {
-            backgroundColor: '',
+            backgroundColor: '#eccc68',
             color: 'black'
         }
     }
