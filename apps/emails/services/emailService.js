@@ -13,19 +13,18 @@ export default {
     querySearch
 }
 
-const gDefaultEmails = [
-    {
+const gDefaultEmails = [{
     id: util.makeId(),
     subject: 'Your API key has been stolen!!',
-    body: 'Don\'t upload your Google Maps API key to GitHub dumbass!',
+    body: 'Don\'t upload your Google Maps API key to GitHub dumbass',
     isRead: false,
     sentAt: 1588152030009,
     sender: util.makeLoremSender(),
     senderAddress: 'frauds@Google.com',
     isStarred: false,
     isTrash: false
-    },
-    {
+},
+{
     id: util.makeId(),
     subject: 'Don\'t forget to do a pishpull',
     body: 'Before you go asleep let\'s do a push and pull, push and pull.',
@@ -35,8 +34,8 @@ const gDefaultEmails = [
     senderAddress: 'pushpull@github.org',
     isStarred: false,
     isTrash: false
-    },
-    {
+},
+{
     id: util.makeId(),
     subject: 'My best independence day ever!',
     body: 'How didn\'t I do it before. It is such a pleasure!',
@@ -46,8 +45,8 @@ const gDefaultEmails = [
     senderAddress: 'loremIpsum@gmail.com',
     isStarred: false,
     isTrash: false
-    },
-    {
+},
+{
     id: util.makeId(),
     subject: 'It is working!!! OMG!!!',
     body: 'Let\'s tell Nevo! I can\'t believe this. We have an appsus!',
@@ -57,8 +56,8 @@ const gDefaultEmails = [
     senderAddress: 'nevo@gmail.com',
     isStarred: false,
     isTrash: false
-    },
-    {
+},
+{
     id: util.makeId(),
     subject: 'Wassap?',
     body: 'Pick up!',
@@ -99,9 +98,9 @@ var gEmails = null;
 
 createEmails();
 
-function createEmails(){
+function createEmails() {
     gEmails = storageService.loadFromStorage(STORAGE_KEY);
-    if (!gEmails || !gEmails.length){
+    if (!gEmails || !gEmails.length) {
         gEmails = gDefaultEmails;
         storageService.saveToStorage(STORAGE_KEY, gEmails)
     }
@@ -115,13 +114,13 @@ function query(filter) {
     return Promise.resolve(gEmails);
 }
 
-function querySearch(filterBy){
+function querySearch(filterBy) {
     let filter = filterBy.toLowerCase();
-    let emails = gEmails.filter(email =>   
-                                            (email.subject.toLowerCase().includes(filter) || 
-                                            email.body.toLowerCase().includes(filter) ||
-                                            email.sender.toLowerCase().includes(filter))
-                                        )
+    let emails = gEmails.filter(email =>
+        (email.subject.toLowerCase().includes(filter) ||
+            email.body.toLowerCase().includes(filter) ||
+            email.sender.toLowerCase().includes(filter))
+    )
     return Promise.resolve(emails);
 }
 

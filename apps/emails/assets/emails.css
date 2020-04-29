@@ -4,6 +4,7 @@
     margin-top: -41px;
 }
 
+
 /* -------------------------- EmailSearchBox.jsx------------------------------ */
 
 .email-search-box {
@@ -20,7 +21,9 @@
     border-radius: 11px;
     border: 2px solid grey;
     padding-left: 10px;
+    margin-left: 173px
 }
+
 
 /* -------------------------- SideNav.jsx------------------------------ */
 
@@ -76,6 +79,7 @@
     background-color: rgb(196, 169, 169);
 }
 
+
 /* -------------------------- EmailCompose.jsx------------------------------ */
 
 .add-email-form {
@@ -124,6 +128,7 @@
     border: 3px solid white;
     color: white;
 }
+
 
 /* -------------------------- EmailDetails.jsx------------------------------ */
 
@@ -187,6 +192,7 @@
     padding-top: 15px;
 }
 
+
 /* -------------------------- EmailList.jsx------------------------------ */
 
 .emails-inner-container {
@@ -219,6 +225,7 @@
     border-radius: 8px;
     font-family: 'Hind Madurai', sans-serif;
 }
+
 
 /* -------------------------- EmailPreview.jsx------------------------------ */
 
@@ -265,4 +272,19 @@
 
 .unread-email.preview-body {
     font-size: 1.8em;
+}
+
+
+/* ---------------------------------BreakPoints----------------------------------------- */
+
+@media only screen and (max-width: 1200px) {
+    .side-nav {
+        width: 100vw;
+        height: 60px;
+        flex-direction: row;
+    }
+    .tray-btn {
+        /* flex-direction: column; */
+        flex-direction: row;
+    }
 }
