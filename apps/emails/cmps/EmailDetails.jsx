@@ -22,7 +22,7 @@ export class EmailDetails extends React.Component {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Yes, delete it!',
           }).then((result) => {
             if (result.value) {
                 emailService.remove(this.state.email.id)

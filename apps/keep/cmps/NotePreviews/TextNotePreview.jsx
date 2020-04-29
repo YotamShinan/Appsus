@@ -20,7 +20,7 @@ export default function TextNotePreview(props) {
 
     return (
         <div className="note text-note flex column space-between" style={{backgroundColor: background, color: fontColor}} >
-            <i className="far fa-paper-plane" onClick={() => props.onSendAsEmail(note.id)}></i>
+            <i className="far fa-paper-plane" onClick={() => props.onSendAsEmail(note.id)} title="email this note"></i>
             <h2 contentEditable suppressContentEditableWarning={true} spellCheck="false" id="title" onBlur={handleChange}>{title}</h2>
             <p contentEditable suppressContentEditableWarning={true} spellCheck="false" id="txt" onBlur={handleChange}>{text}</p>
 
