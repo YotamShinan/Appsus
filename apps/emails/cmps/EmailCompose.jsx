@@ -8,43 +8,21 @@ export class EmailCompose extends React.Component {
         body: '',
     }
     componentDidMount() {
-        // TODO
-        // const urlParams = new URLSearchParams(window.location.search);
-        // console.log(window.location.search)
-        // console.log(urlParams);
-        // let subject = urlParams.get('subject');
-        // // let body = urlParams.get('body');
-        // // console.log('subject', subject, 'body', body);
-
-
+        // In case of query string param - Note as email from the KeepApp
         const location = this.props.location.search.substring(1);
-        if (location){
-            // console.log(location);
-            var vars = location.split("&");
-            var stam = [];
-            for (var i = 0; i < vars.length; i++) {
-                var pair = vars[i].split("=");
-                stam.push(pair);
-            }
-
-            console.log(stam);
-            this.setState({ subject: stam[0][1], address: stam[1][1], body: stam[2][1] })
+        if (location) {
+            var params = location.split('&');
+            var newEmailData = {};
+            params.forEach(element => {
+                var pair = element.split('=');
+                pair[1] = pair[1].split('%20').join(' ')
+                newEmailData[pair[0]] = pair[1];
+            });
+            this.setState({ subject: newEmailData.subject, address: newEmailData.address, body: newEmailData.body })
         }
 
-        // const url = new URL(window.location);
-        // const params = new URLSearchParams(url.search);
-        // console.log(params);
-        // var subject = params.get('subject');
-        // console.log('subject', subject);
-
-
-
-        // const params = new URLSearchParams('?body=popo&subject=ernest')
-        // console.log(this.state.subject)
-
-
+        // In case of email id param - reply to email
         const id = this.props.match.params.emailId;
-        console.log('id', id);
         if (id) {
             emailService.getById(id)
                 .then(email => {
@@ -57,6 +35,7 @@ export class EmailCompose extends React.Component {
                 })
         }
     }
+
     onAddEmail = (ev) => {
         ev.preventDefault();
         emailService.createEmail(this.state.subject, this.state.body, this.state.address)

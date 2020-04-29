@@ -15,15 +15,27 @@ export class EmailDetails extends React.Component {
             })
     }
     onRemoveEmail = () => {
-        emailService.remove(this.state.email.id)
-            .then(() => {
-                eventBus.emit('show-msg', { txt: 'Email deleted successfully!' })
-                this.props.history.push('/emails/')
-            })
-            .catch(err => {
-                alert('OOPs, try again');
-                console.log('ERR:', err);
-            })
+        Swal.fire({
+            title: 'Are you sure you want to delete this email?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.value) {
+                emailService.remove(this.state.email.id)
+                    .then(() => {
+                        eventBus.emit('show-msg', { txt: 'Email deleted successfully!' })
+                        this.props.history.push('/emails/')
+                    })
+                    .catch(err => {
+                        alert('OOPs, try again');
+                        console.log('ERR:', err);
+                    })
+            }
+          })
     }
     onToggleStarEmail = () => {
         emailService.toggleStar(this.state.email.id)
@@ -74,14 +86,14 @@ export class EmailDetails extends React.Component {
                 <section className="email-details flex column">
                     <div className="email-details-wrapper flex column">
                         <div className="email-details-btns flex align-center">
-                            <Link to="/emails/"  title="Back"><i className="fas fa-chevron-left"></i></Link>
+                            <Link to="/emails/" title="Back"><i className="fas fa-chevron-left"></i></Link>
                             <a to="/emails/" onClick={this.onToggleTrash}>{(email.isTrash) ? <i className="fas fa-inbox" title="Move to Inbox"></i> : <i className="fas fa-trash-alt" title="Move to Trash"></i>}</a>
                             <a onClick={this.onToggleStarEmail} className={(email.isStarred) ? "starred" : ""} title={(email.isStarred) ? "unstar" : "star"}><i className="fas fa-star"></i></a>
                             <a onClick={this.onToggleRead} >Mark as unread</a>
                             {email.isTrash && <a onClick={this.onRemoveEmail} title="Delete permanently"><i className="fas fa-skull-crossbones"></i></a>}
                             <a onClick={this.onReply} title="Replay to email"><i className="fas fa-reply"></i></a>
                         </div>
-                        <div className="emails-details-main">
+                        <div className="email-details-main">
                             <h1>{email.subject}</h1>
                             <h2>{email.sender} &#60;<span>{email.senderAddress}</span>&gt;</h2>
                             <p>{email.body}</p>

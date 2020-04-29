@@ -23,7 +23,7 @@ export default class Keep extends React.Component {
     
     onSendAsEmail = (noteId) => { 
         keepService.getNoteInfoForSending(noteId)
-        .then((note) => this.props.history.push(`/emails/new/?subject=${note.info.title}&address=keep@google.com&body=${note.info.txt}`)
+        .then((note) => this.props.history.push(`/emails/new/?subject=${note.info.title}&address=keepApp@google.com&body=${note.info.txt}`)
         )
     }
 
