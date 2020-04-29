@@ -160,3 +160,13 @@ a.main-nav-active {
     color: #047204;
     transition: 0.4s;
 }
+
+/* -------------------------- SWAL----------------------------------- */
+
+.swal2-container{
+    font-family: 'Hind Madurai', sans-serif;
+ }
+
+ .swal2-container button{
+    font-family: 'Hind Madurai', sans-serif;
+ }
