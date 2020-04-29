@@ -17,7 +17,7 @@ const gDefaultEmails = [
     {
     id: util.makeId(),
     subject: 'Your API key has been stolen!!',
-    body: 'Don\'t upload your Google Maps API key to GitHub dumbass',
+    body: 'Don\'t upload your Google Maps API key to GitHub dumbass!',
     isRead: false,
     sentAt: 1588152030009,
     sender: util.makeLoremSender(),
@@ -28,7 +28,7 @@ const gDefaultEmails = [
     {
     id: util.makeId(),
     subject: 'Don\'t forget to do a pishpull',
-    body: 'Before you go asleep let\'s do a push and pull, push and pull.\n Hey! Don\'t forget to do add and commit.',
+    body: 'Before you go asleep let\'s do a push and pull, push and pull.',
     isRead: false,
     sentAt: 1588152030009,
     sender: util.makeLoremSender(),
@@ -39,7 +39,7 @@ const gDefaultEmails = [
     {
     id: util.makeId(),
     subject: 'My best independence day ever!',
-    body: 'How didn\'t I do it before. It is such a pleasure.',
+    body: 'How didn\'t I do it before. It is such a pleasure!',
     isRead: false,
     sentAt: 1588152030009,
     sender: util.makeLoremSender(),
