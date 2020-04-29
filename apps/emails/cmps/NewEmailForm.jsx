@@ -10,6 +10,7 @@ export class NewEmailForm extends React.Component {
         body: ''
     }
     componentDidMount() {
+        // TODO
         console.log(this.props);
        const params= new URLSearchParams('?body=popo&subject=ernest')
         // console.log(this.state.subject)
