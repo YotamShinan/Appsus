@@ -2,6 +2,7 @@
 import services from '../services/keepService.js'
 import makeId from '../../../services/utilService.js'
 import eventBus from '../../../services/eventBusService.js';
+import utils from '../../../services/utilService.js'
 
 export default class AddNote extends React.Component {
     state = {
@@ -48,7 +49,7 @@ export default class AddNote extends React.Component {
                 break;
             case 'todo':
                 info.todos = []
-                this.state.text.split(',').map(txt => info.todos.push({ id: makeId.makeId(), txt, isDone: false }))
+                this.state.text.split(',').map(txt => info.todos.push({ id: utils.makeId(), txt, isDone: false }))
                 break;
             default:
                 info.title = this.state.text

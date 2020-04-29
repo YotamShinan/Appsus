@@ -12,6 +12,7 @@ export default {
     removeNoteById,
     getPinnedNotes,
     toggleIsPinned,
+    toggleTodoIsDone,
 
 };
 
@@ -29,7 +30,7 @@ function query() {
 function addNote(type, info) {
     gNotes = JSON.parse(JSON.stringify(gNotes))
     const newNote = new Note(type, info)
-    gNotes.push(newNote)
+    gNotes.unshift(newNote)
     saveNotes()
     return Promise.resolve(newNote)
 }
@@ -76,9 +77,11 @@ function toggleIsPinned(noteId) {
     })
 }
 
-
-
-
+function toggleTodoIsDone(noteId, todoId) {
+    getNoteById(noteId).then(todoToUpdate =>
+        todoToUpdate.info.todos.find(todo => todoId === todo.id).isDone = !todoToUpdate.info.todos.find(todo => todoId === todo.id).isDone)
+    return Promise.resolve()
+}
 
 function createTestNotes() {
     gNotes = [{
@@ -108,15 +111,27 @@ function createTestNotes() {
             }
         },
         {
+            type: "video",
+            id: utils.makeId(),
+            isPinned: false,
+            info: {
+                title: "Here is a video:",
+                url: "https://www.youtube.com/embed/npyz-qB01bM"
+            },
+            style: {
+                backgroundColor: "lightsalmon",
+                color: "green",
+            }
+        },
+        {
             type: "todo",
             id: utils.makeId(),
             isPinned: true,
             info: {
                 title: "TODO NOTE",
                 todos: [
-                    { txt: "Do things", isDone: true, doneAt: null },
-                    { txt: "Do more", isDone: false, doneAt: 'timeStamp' },
-
+                    { id: '22QQS', txt: "Do things", isDone: true },
+                    { id: '8UJ65', txt: "Do more", isDone: false },
                 ]
             },
             style: {

@@ -18,7 +18,7 @@ export default function NotesPreview(props) {
     return (
         <div className="note-preview flex column">
             {note.type === "txt" && <TextNotePreview note={note} />}
-            {note.type === "todo" && <TodoNotePreview note={note} />}
+            {note.type === "todo" && <TodoNotePreview note={note} onToggleIsDone={props.onToggleIsDone} />}
             {note.type === "img" && <ImgNotePreview note={note} />}
             {note.type === "video" && <VideoNotePreview note={note} />}
             {NoteTools}

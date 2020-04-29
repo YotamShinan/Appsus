@@ -11,11 +11,13 @@ export default function TodoNotePreview(props) {
         KeepService.updateNoteById(note.id, {field, txt});
     }
 
+    
+
     return (
         <div className="note todo-note flex column space-between">
             <h2 contentEditable suppressContentEditableWarning={true} spellCheck="false" id="title" onBlur={handleChange}>{title}</h2>
             <ul className="clean-list">
-                {todos.map((todo, idx) => <li key={idx}><p>{todo.txt} - Created At: {todo.doneAt}</p></li>)}
+                {todos.map((todo, idx) => <li className={(!todo.isDone) ? "todo-not-done" : "todo-is-done"} onClick={() => props.onToggleIsDone(note.id, todo.id)} key={idx}><h3>{todo.txt}</h3></li>)}
             </ul>
 
         </div>

@@ -25,8 +25,10 @@ p {
 
 .pinned-notes-container {
     width: 100vw;
-    min-height: 400px;
     background-color: white;
+    padding: 20px;
+    background-color: #3498db;
+    border-bottom: 1px solid white;
 }
 
 
@@ -122,6 +124,13 @@ p {
 }
 
 
+/* ----------------------------to do's ----------------------------------- */
+
+.todo-is-done {
+    text-decoration: line-through;
+}
+
+
 /* -------------------------- respopnsives -------------------------------- */
 
 .note:hover h2 {
@@ -130,6 +139,10 @@ p {
 
 .note:hover p {
     border: 1px dashed;
+}
+
+.note:hover h3 {
+    cursor: pointer;
 }
 
 .note-preview:hover>.note-tools {
