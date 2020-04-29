@@ -65,19 +65,13 @@ export default class AddNote extends React.Component {
                 this.setState({ placeholder: 'Enter text', text: '' })
                 break;
             case 'todo':
-                this.setState({ placeholder: 'Enter stuff to do', text: '' })
+                this.setState({ placeholder: 'Type down your to-do\'s here. Separate, them, by, commas :)', text: '' })
                 break;
             case 'img':
                 this.setState({ placeholder: 'Enter image URL', text: '' })
                 break;
             case 'video':
                 this.setState({ placeholder: 'Enter video URL', text: '' })
-                break;
-            case 'maps':
-                this.setState({ placeholder: 'Enter (lat,lng) or place name', text: '' })
-                break;
-            case 'music':
-                this.setState({ placeholder: 'Enter mp3 or Spotify URL', text: '' })
                 break;
             default:
                 break;
@@ -99,13 +93,6 @@ export default class AddNote extends React.Component {
             <label htmlFor="video" className={ (type === 'video') ? 'active-type' : '' }>
                 <i className="fas fa-video"></i></label>
             <input onChange={ this.onTypeChange } type='radio' id='video' name='type' value='video' />
-            <label htmlFor="maps" className={ (type === 'maps') ? 'active-type' : '' }>
-                <i className="fas fa-map-marked-alt"></i></label>
-            <input onChange={ this.onTypeChange } type='radio' id='maps' name='type' value='maps' />
-            <label htmlFor="music" className={ (type === 'music') ? 'active-type' : '' }>
-                <i className="fas fa-music"></i></label>
-            <input onChange={ this.onTypeChange } type='radio' id='music' name='type' value='music' />
-
         </div>
     }
 

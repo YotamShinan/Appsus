@@ -1,5 +1,6 @@
-@import url('../../apps/emails/assets/emails.css');
 @import url('../../apps/keep/assets/keep.css');
+@import url('../../apps/books/assets/css/books.css');
+@import url('../../apps/emails/assets/emails.css');
 * {
     box-sizing: border-box;
     margin: 0;
@@ -22,6 +23,10 @@ div a i {
 
 input[type="radio"] {
     display: none;
+}
+
+input[type="color"] {
+    opacity: 0;
 }
 
 

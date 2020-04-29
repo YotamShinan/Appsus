@@ -13,6 +13,7 @@ export default {
     getPinnedNotes,
     toggleIsPinned,
     toggleTodoIsDone,
+    getNoteInfoForSending,
 
 };
 
@@ -83,6 +84,10 @@ function toggleTodoIsDone(noteId, todoId) {
     return Promise.resolve()
 }
 
+function getNoteInfoForSending(noteId) {
+    return (getNoteById(noteId).then((note) => { return note }))
+}
+
 function createTestNotes() {
     gNotes = [{
             type: "txt",
@@ -106,8 +111,8 @@ function createTestNotes() {
                 url: "https://i5.walmartimages.com/asr/209bb8a0-30ab-46be-b38d-58c2feb93e4a_1.1a15fb5bcbecbadd4a45822a11bf6257.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF"
             },
             style: {
-                backgroundColor: "blue",
-                color: "pink",
+                backgroundColor: "black",
+                color: "red",
             }
         },
         {
