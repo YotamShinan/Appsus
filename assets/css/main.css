@@ -50,6 +50,23 @@ header img:hover {
     box-shadow: 0px 6px 4px 0px rgba(0, 0, 0, 0.66);
 }
 
+.home-page {
+    justify-content: center;
+    height: 82vh;
+    align-items: center;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 70px;
+    color: #4e0c21;
+}
+
+.home-page span {
+    font-size: 50px;
+}
+
+.home-page img {
+    padding-top: 96px;
+}
+
 .nav-bar {
     width: 80%;
     margin-right: 30px;
@@ -60,13 +77,11 @@ header img:hover {
     font-family: 'Exo 2', sans-serif;
     color: white;
     width: 100%;
-    padding: 20px;
-    border-radius: 200px 18px 198px 0px;
-    background-color: #636e72;
+    padding: 0px 20px 20px 20px;
 }
 
 .main-nav-list a {
-    color: white;
+    color: #2f3640;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -76,7 +91,7 @@ header img:hover {
 }
 
 a.main-nav-active {
-    color: #0abde3;
+    color: #8b160af0;
 }
 
 
@@ -163,12 +178,142 @@ a.main-nav-active {
     transition: 0.4s;
 }
 
+
 /* -------------------------- SWAL----------------------------------- */
 
-.swal2-container{
+.swal2-container {
     font-family: 'Hind Madurai', sans-serif;
- }
+}
 
- .swal2-container button{
+.swal2-container button {
     font-family: 'Hind Madurai', sans-serif;
- }
+}
+
+
+/* ---------------------------------BreakPoints----------------------------------------- */
+
+
+/* -----------------------------------Emails---------------------------------------------- */
+
+@media only screen and (max-width: 1200px) {
+    .side-nav {
+        width: 100vw;
+        min-width: 660px;
+        height: 60px;
+        flex-direction: row;
+        box-shadow: none;
+    }
+    .tray-btn {
+        /* flex-direction: column; */
+        flex-direction: row;
+        margin-right: 50px;
+    }
+    .email-container {
+        flex-direction: column;
+    }
+    .email-nav-active {
+        background-color: inherit;
+        color: black;
+        font-weight: bolder;
+    }
+    .new-mail-btn {
+        margin-left: 20px;
+        margin-bottom: 9px;
+    }
+    .read-email {
+        font-size: 0.8em;
+    }
+    .unread-mail {
+        font-size: 0.8em;
+    }
+    .emails-list {
+        padding-left: 7px;
+    }
+    .emails-list li {
+        padding: 8px;
+        margin-top: 5px;
+        border-radius: 8px;
+        font-family: 'Hind Madurai', sans-serif;
+        height: 85px;
+        display: flex;
+        align-items: center;
+        min-width: 630px;
+    }
+    .preview-subject {
+        display: flex;
+        flex-direction: column;
+        font-size: 0.8em;
+    }
+    .preview-subject div {
+        font-size: 0.8em;
+    }
+    .email-details-main h1 {
+        font-size: 1.5em;
+    }
+    .email-details-main h2 {
+        font-size: 1em;
+    }
+    .email-details-main p {
+        font-size: 0.8em;
+    }
+    .email-details-btns {
+        font-size: 0.8em;
+    }
+    .email-search-box {
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        margin-top: 0;
+        margin-bottom: 39px;
+        background-color: white;
+        padding: 20px;
+    }
+    /* -----------------------------------Header------------------------------- */
+    .main-nav-list {
+        font-size: 1.5em;
+        font-family: 'Exo 2', sans-serif;
+        color: black;
+        width: 100%;
+        padding: 20px;
+        border-radius: 0;
+        background-color: inherit;
+        min-width: 480px;
+    }
+    .main-nav-list a {
+        color: #353b48
+    }
+    .a.main-nav-active {
+        color: #0abde3;
+    }
+    header img {
+        width: 140px;
+    }
+    /* -----------------------------------------MissKeep-------------------------------- */
+    .pinned-notes-container {
+        align-items: center;
+        flex-direction: column;
+    }
+    .notes-list {
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+    .notes-container {
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    /* ----------------------------------------Books---------------------------------------- */
+    .book-list {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    .filter {
+        padding: 20px 25px 20px 32px;
+    }
+    .filter h1 {
+        display: none;
+    }
+    .filter-form {
+        width: 100%;
+    }
+}
