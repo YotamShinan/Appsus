@@ -4,7 +4,7 @@ export default function NotesList(props) {
   
     return (
         <div className="notes-list flex wrap">
-            {props.notes.map(note => <NotesPreview note={note} key={note.id} onRemoveNote={props.onRemoveNote} onToggleIsPinned={props.onToggleIsPinned}/>)}
+            {props.notes.map(note => <NotesPreview note={note} key={note.id} onToggleIsDone={props.onToggleIsDone} onRemoveNote={props.onRemoveNote} onToggleIsPinned={props.onToggleIsPinned}/>)}
         </div>
     )
 }

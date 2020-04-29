@@ -35,17 +35,22 @@ export default class Keep extends React.Component {
         
     }
 
+    onToggleIsDone = (noteId, todoId) => {        
+        keepService.toggleTodoIsDone(noteId, todoId)
+        .then(this.loadNotes);
+    }
+
     render() {
         const { notes, pinnedNotes } = this.state;
         return (
             <React.Fragment>
                 <AddNote loadNotes={this.loadNotes}/>
                 <section className="pinned-notes-container flex">
-                    {pinnedNotes && <NotesList notes={pinnedNotes} onRemoveNote={this.onRemoveNote} onToggleIsPinned={this.onToggleIsPinned} />}
+                    {pinnedNotes && <NotesList notes={pinnedNotes} onRemoveNote={this.onRemoveNote} onToggleIsDone={this.onToggleIsDone} onToggleIsPinned={this.onToggleIsPinned} />}
                 </section>
                 <br />
                 <section className="notes-container flex column">
-                    {notes && <NotesList notes={notes} onRemoveNote={this.onRemoveNote} onToggleIsPinned={this.onToggleIsPinned} />}
+                    {notes && <NotesList notes={notes} onRemoveNote={this.onRemoveNote} onToggleIsDone={this.onToggleIsDone} onToggleIsPinned={this.onToggleIsPinned} />}
                 </section>
 
             </React.Fragment>
