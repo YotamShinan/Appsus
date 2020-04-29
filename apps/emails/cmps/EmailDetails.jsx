@@ -3,9 +3,6 @@ import eventBus from '../../../services/eventBusService.js';
 
 const { Link } = ReactRouterDOM
 
-const STAR = '★';
-const TRASH = '🗑';
-
 export class EmailDetails extends React.Component {
     state = {
         email: null
@@ -26,7 +23,6 @@ export class EmailDetails extends React.Component {
             .catch(err => {
                 alert('OOPs, try again');
                 console.log('ERR:', err);
-
             })
     }
     onToggleStarEmail = () => {
@@ -45,7 +41,6 @@ export class EmailDetails extends React.Component {
                 if (email.isRead)
                     eventBus.emit('show-msg', { txt: 'Email marked as read successfully!' })
                 else eventBus.emit('show-msg', { txt: 'Email marked as unread successfully!' })
-
                 this.props.history.push('/emails/')
             })
             .catch(err => {
@@ -59,14 +54,15 @@ export class EmailDetails extends React.Component {
                 if (email.isTrash)
                     eventBus.emit('show-msg', { txt: 'Email moved to trash successfully!' })
                 else eventBus.emit('show-msg', { txt: 'Email moved to Inbox successfully!' })
-
                 this.props.history.push('/emails/')
-
             })
             .catch(err => {
                 alert('OOPs, try again');
                 console.log('ERR:', err);
             })
+    }
+    onReply = () => {
+        this.props.history.push('/emails/new/' + this.state.email.id)
     }
 
     render() {
@@ -78,11 +74,12 @@ export class EmailDetails extends React.Component {
                 <section className="email-details flex column">
                     <div className="email-details-wrapper flex column">
                         <div className="email-details-btns flex align-center">
-                            <Link to="/emails/"><i class="fas fa-chevron-left"></i></Link>
-                            <a to="/emails/" onClick={this.onToggleTrash}>{(email.isTrash) ? <i class="fas fa-inbox"></i> : <i className="fas fa-trash-alt"></i>}</a>
-                            <a onClick={this.onToggleStarEmail} className={(email.isStarred) ? "starred" : ""}><i class="fas fa-star"></i></a>
+                            <Link to="/emails/"  title="Back"><i className="fas fa-chevron-left"></i></Link>
+                            <a to="/emails/" onClick={this.onToggleTrash}>{(email.isTrash) ? <i className="fas fa-inbox" title="Move to Inbox"></i> : <i className="fas fa-trash-alt" title="Move to Trash"></i>}</a>
+                            <a onClick={this.onToggleStarEmail} className={(email.isStarred) ? "starred" : ""} title={(email.isStarred) ? "unstar" : "star"}><i className="fas fa-star"></i></a>
                             <a onClick={this.onToggleRead} >Mark as unread</a>
-                            {email.isTrash && <a onClick={this.onRemoveEmail}><i class="fas fa-skull-crossbones"></i></a>}
+                            {email.isTrash && <a onClick={this.onRemoveEmail} title="Delete permanently"><i className="fas fa-skull-crossbones"></i></a>}
+                            <a onClick={this.onReply} title="Replay to email"><i className="fas fa-reply"></i></a>
                         </div>
                         <div className="emails-details-main">
                             <h1>{email.subject}</h1>

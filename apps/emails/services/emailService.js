@@ -13,7 +13,41 @@ export default {
     querySearch
 }
 
-const gDefaultEmails = [{
+const gDefaultEmails = [
+    {
+    id: util.makeId(),
+    subject: 'Don\'t forget to do a pishpull',
+    body: 'Before you go asleep let\'s do a push and pull, push and pull.',
+    isRead: false,
+    sentAt: 1588152030009,
+    sender: util.makeLoremSender(),
+    senderAddress: 'pushpull@github.org',
+    isStarred: false,
+    isTrash: false
+    },
+    {
+    id: util.makeId(),
+    subject: 'My best independence day ever!',
+    body: 'How didn\'t I do it before. It is such a pleasure.',
+    isRead: false,
+    sentAt: 1588152030009,
+    sender: util.makeLoremSender(),
+    senderAddress: 'loremIpsum@gmail.com',
+    isStarred: false,
+    isTrash: false
+    },
+    {
+    id: util.makeId(),
+    subject: 'It is working!!! OMG!!!',
+    body: 'Let\'s tell Nevo! I can\'t believe this. We have an appsus!',
+    isRead: false,
+    sentAt: 1588152030002,
+    sender: util.makeLoremSender(),
+    senderAddress: 'nevo@gmail.com',
+    isStarred: false,
+    isTrash: false
+    },
+    {
     id: util.makeId(),
     subject: 'Wassap?',
     body: 'Pick up!',
@@ -38,7 +72,7 @@ const gDefaultEmails = [{
 {
     id: util.makeId(),
     subject: 'New Email',
-    body: 'Done at createEmail',
+    body: 'Done at createEmail a loooong time ago',
     isRead: false,
     sentAt: 155118390594,
     sender: util.makeLoremSender(),
@@ -56,7 +90,7 @@ createEmails();
 
 function createEmails(){
     gEmails = storageService.loadFromStorage(STORAGE_KEY);
-    if (!gEmails){
+    if (!gEmails || !gEmails.length){
         gEmails = gDefaultEmails;
         storageService.saveToStorage(STORAGE_KEY, gEmails)
     }

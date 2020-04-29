@@ -1,7 +1,3 @@
-
-
-
-
 export class SearchBox extends React.Component {
     state = {
         txt: ''
@@ -9,15 +5,14 @@ export class SearchBox extends React.Component {
     handleChange = ({ target }) => {
         const name = target.name
         const value = target.value
-        this.setState({ [name]: value },() => {
-            this.props.onSetSearch(this.state.txt)})
-     }
-            
+        this.setState({ [name]: value }, () => {
+            this.props.onSetSearch(this.state.txt)
+        })
+    }
     render() {
-        // console.log(this.state.txt)
-        return(
-            <div className="emails-search-box">
-                <input type="search" name='txt' value={ this.state.txt } onChange={ this.handleChange } className="email-search-input"  placeholder="Search here!" />
+        return (
+            <div className="email-search-box">
+                <input type="search" name='txt' value={this.state.txt} onChange={this.handleChange} className="email-search-input" placeholder="Search here!" />
             </div>
         )
     }
