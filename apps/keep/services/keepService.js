@@ -98,8 +98,8 @@ function createTestNotes() {
                 txt: "so much wow"
             },
             style: {
-                backgroundColor: "blue",
-                color: "pink",
+                backgroundColor: "#d35400",
+                color: "#ecf0f1",
             }
         },
         {
@@ -107,12 +107,12 @@ function createTestNotes() {
             id: utils.makeId(),
             isPinned: false,
             info: {
-                title: "IMAGE NOTE",
+                title: "Hungry?",
                 url: "https://i5.walmartimages.com/asr/209bb8a0-30ab-46be-b38d-58c2feb93e4a_1.1a15fb5bcbecbadd4a45822a11bf6257.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF"
             },
             style: {
-                backgroundColor: "black",
-                color: "red",
+                backgroundColor: "#e84393",
+                color: "#ffeaa7",
             }
         },
         {
@@ -124,14 +124,14 @@ function createTestNotes() {
                 url: "https://www.youtube.com/embed/npyz-qB01bM"
             },
             style: {
-                backgroundColor: "lightsalmon",
-                color: "green",
+                backgroundColor: "#2f3640",
+                color: "#f5f6fa",
             }
         },
         {
             type: "todo",
             id: utils.makeId(),
-            isPinned: true,
+            isPinned: false,
             info: {
                 title: "TODO NOTE",
                 todos: [
@@ -140,8 +140,67 @@ function createTestNotes() {
                 ]
             },
             style: {
-                backgroundColor: "blue",
-                color: "pink",
+                backgroundColor: "#e84118",
+                color: "#f5f6fa",
+            }
+        },
+        // ----------------------------------***********************--------------------------------------
+        {
+            type: "txt",
+            id: utils.makeId(),
+            isPinned: false,
+            info: {
+                title: "Such a text note!",
+                txt: "There comes a time in one\'s life when they have to look down at what they just did, and then wipe it off their ass"
+            },
+            style: {
+                backgroundColor: "#9b59b6",
+                color: "white",
+            }
+        },
+        {
+            type: "img",
+            id: utils.makeId(),
+            isPinned: false,
+            info: {
+                title: "Such an animal lover <3",
+                url: "https://scontent.fsdv3-1.fna.fbcdn.net/v/t1.0-9/50277579_10218794633555812_5918837655444914176_o.jpg?_nc_cat=110&_nc_sid=dd9801&_nc_oc=AQkY5TpxxCkfHiIplAuazeBmf9ZNPBtETU1NK0uhRBhEX76DpwQsfonwmF22D7g87Ds&_nc_ht=scontent.fsdv3-1.fna&oh=468f9848deef12d75b80065bad289fd9&oe=5ECD85B5"
+            },
+            style: {
+                backgroundColor: "lightsalmon",
+                color: "black",
+            }
+        },
+        {
+            type: "video",
+            id: utils.makeId(),
+            isPinned: true,
+            info: {
+                title: "chilllllax, watch trump\'s most awkward moments:",
+                url: "https://www.youtube.com/watch?v=vlxmiFF85yU"
+            },
+            style: {
+                backgroundColor: "#7f8c8d",
+                color: "#f5f6fa",
+            }
+        },
+        {
+            type: "todo",
+            id: utils.makeId(),
+            isPinned: true,
+            info: {
+                title: "Shit to got DONE",
+                todos: [
+                    { id: '22QQS', txt: "FIND LOVE", isDone: false },
+                    { id: '86565', txt: "GET RICH", isDone: false },
+                    { id: '8KU65', txt: "KILL TIME ON TINDER", isDone: true },
+                    { id: '10J65', txt: "TAKE OUT THE TRASH", isDone: true },
+                    { id: 'YUI56', txt: "FIND SOMETHING TODO WITH THIS LIFE", isDone: false },
+                ]
+            },
+            style: {
+                backgroundColor: "#fed330",
+                color: "#222f3e",
             }
         }
     ];
